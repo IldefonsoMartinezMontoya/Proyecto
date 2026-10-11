@@ -1,0 +1,36 @@
+nav {
+  background-color: rgba(255, 215, 0, 0.35);
+  padding: 12px;
+  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px;  
+  align-items: center;
+}
+
+nav a {
+  margin-right: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+body {
+    background-image: url("Gemini_Generated_Image_e8k9bxe8k9bxe8k9.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.portada {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+.portada button {
+    padding: 12px 30px;
+    font-size: 1rem;
+}
