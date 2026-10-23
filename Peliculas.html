@@ -1,18 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peliculas</title>
+    <meta name="theme-color" content="#f0cf58">
+    <title>Películas | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="EstilosComunes.css">
     <link rel="stylesheet" href="PeliculaEstilo.css">
 </head>
 <body>
-    <nav>
-        <a href="Home.html">Home</a>
-        <a href = "Aplicacion.html">Aplicación</a>
-        <a href="SobreNosotros.htm">Sobre Nosotros</a>
-        <a href="Preguntas.html">Preguntas Frecuentes</a>
-        <a href="Soporte.html">Soporte Técnico</a>
-    </nav>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html">Aplicación</a>
+                <a href="Peliculas.html" aria-current="page">Películas</a>
+                <a href="Preguntas.html">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <section class="panel catalogo-vacio">
+            <p class="eyebrow">El catálogo</p>
+            <h1>Películas para cada plan</h1>
+            <p class="lead">Aquí aparecerán las películas disponibles para que podáis consultar sus detalles y elegir vuestra próxima sesión.</p>
+            <a class="boton" href="Aplicacion.html">Cómo funciona <span aria-hidden="true">→</span></a>
+        </section>
+    </main>
 </body>
 </html>
+

@@ -1,51 +1,10 @@
 body {
-    background-image: url("Gemini_Generated_Image_nufnwpnufnwpnufn (1).jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-nav {
-  background-color: rgba(255, 215, 0, 0.35);
-  padding: 12px;
-  border: 2px solid black;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 12px;  
-  align-items: center;
-}
-
-nav a {
-  margin-right: 20px;
-  color: black;
-  text-decoration: none;
-}
-
-#Raul {
-  position: fixed;
-  left: 21%;
-  top: 80%;
-  transform: translateX(-50%);
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
-}
-#Ilde {
-    position: fixed;
-    left: 51%;
-    top: 80%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-}
-#Pedro {
-    position: fixed;
-    left: 81%;
-    top: 80%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
+  background-color: #29483a;
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("Gemini_Generated_Image_nufnwpnufnwpnufn (1).jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

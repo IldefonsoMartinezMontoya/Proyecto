@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas Frecuentes</title>
+    <meta name="theme-color" content="#f0cf58">
+    <title>Preguntas frecuentes | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="EstilosComunes.css">
     <link rel="stylesheet" href="PreguntasEstilos.css">
 </head>
 <body>
-    <nav>
-        <a href ="Home.html">Home</a>
-        <a href = "Aplicacion.html">Aplicación</a>
-        <a href="SobreNosotros.htm">Sobre Nosotros</a>
-        <a href="Peliculas.html">Peliculas</a>
-        <a href="Soporte.html">Soporte Técnico</a>
-    </nav>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html">Aplicación</a>
+                <a href="Peliculas.html">Películas</a>
+                <a href="Preguntas.html" aria-current="page">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+            </div>
+        </nav>
+    </header>
 
-    <section class="contenido">
-        <div class="texto">
-            <p><b>Q:</b> ¿Por qué limones y no otra cosa?</p>
-            <p><b>A:</b> ¡Porque los limones molan y las películas también!</p>
-            <p></p>
-            <p><b>Q:</b>¿De dónde proceden las películas?</p>
-            <p><b>A:</b>Nuestra distribuidora se pone en contacto con los productores e implementamos las películas siguiendo un contrato.</p>
-        </div>
-    </section>
+    <main class="page-shell">
+        <section class="panel">
+            <p class="eyebrow">Resolvemos tus dudas</p>
+            <h1>Preguntas frecuentes</h1>
+
+            <div class="faq-list">
+                <article class="faq-item">
+                    <h2>¿Por qué limones y no otra cosa?</h2>
+                    <p>¡Porque los limones molan y las películas también!</p>
+                </article>
+                <article class="faq-item">
+                    <h2>¿De dónde salen las películas?</h2>
+                    <p>La selección se incorpora a través de acuerdos con los productores.</p>
+                </article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
+

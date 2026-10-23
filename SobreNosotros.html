@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Nosotros</title>
+    <meta name="theme-color" content="#f0cf58">
+    <title>Sobre nosotros | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="EstilosComunes.css">
     <link rel="stylesheet" href="SobreNosotros.css">
 </head>
 <body>
-    <nav>
-        <a href ="Home.html">Home</a>
-        <a href="Aplicacion.html">Aplicación</a>
-        <a href="Preguntas.html">Preguntas Frecuentes</a>
-        <a href="Peliculas.html">Peliculas</a>
-        <a href="Soporte.html">Soporte Técnico</a>
-    </nav>
-    <p id="Raul">Raúl Rentero Chico</p>
-    <p id="Ilde">Ildefonso Martínez Montoya</p>
-    <p id="Pedro">Pedro Juan García Elías</p>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html">Aplicación</a>
+                <a href="Peliculas.html">Películas</a>
+                <a href="Preguntas.html">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html" aria-current="page">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <section class="panel">
+            <p class="eyebrow">El equipo</p>
+            <h1>Sobre nosotros</h1>
+            <p class="lead">Somos el equipo detrás de Limoncio-Pelicular. Queremos que elegir qué película ver sea un plan sencillo y divertido para todos.</p>
+
+            <div class="team-grid">
+                <article class="team-card">
+                    <h2>Raúl Rentero Chico</h2>
+                </article>
+                <article class="team-card">
+                    <h2>Ildefonso Martínez Montoya</h2>
+                </article>
+                <article class="team-card">
+                    <h2>Pedro Juan García Elías</h2>
+                </article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
+

@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación</title>
+    <meta name="theme-color" content="#f0cf58">
+    <title>Aplicación | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="EstilosComunes.css">
     <link rel="stylesheet" href="AplicacionEstilos.css">
 </head>
 <body>
-    <nav>
-        <a href ="Home.html">Home</a>
-        <a href="SobreNosotros.htm">Sobre Nosotros</a>
-        <a href="Preguntas.html">Preguntas Frecuentes</a>
-        <a href="Peliculas.html">Peliculas</a>
-        <a href="Soporte.html">Soporte Técnico</a>
-    </nav>
-    <section class="contenido">
-        <div class="texto">
-            <h2>¿Qué hace la aplicación?</h2>
-            <p>
-                La aplciación te permite unirte a un grupo de amigos o <br> 
-                invitarlos y, entre todos, votar el género de película que mejor <br> 
-                cuadre para la ocasión.
-                <br>
-                <br>
-                De esta manera mediante votaciones al género o <br> 
-                directamente a la película más votada. Poder ver todos una <br> 
-                película de manera rápida y sin interrupciones desde <br> 
-                cualquier lugar. 
-                <br>
-                <br>
-                La app, además, permite calificar las películas e incluso poner <br> 
-                tus propios comentarios para cada película. <br> 
-                Pero como en todo plan, siempre puede haber contratiempos. <br>
-                Por eso hemos añadido la función de poder ver el trailer. <br> 
-                Para los que no conozcan la película.
-            </p>
-        </div>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html" aria-current="page">Aplicación</a>
+                <a href="Peliculas.html">Películas</a>
+                <a href="Preguntas.html">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+            </div>
+        </nav>
+    </header>
 
-        <! <img src="" alt="">
-    </section>
+    <main class="page-shell">
+        <section class="panel">
+            <p class="eyebrow">Así funciona</p>
+            <h1>Decidid juntos qué ver</h1>
+            <p class="lead">La aplicación ayuda a tu grupo a pasar de “¿qué película ponemos?” a tener un plan elegido entre todos.</p>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <h2>1. Reunid al grupo</h2>
+                    <p>Crea un grupo de amigos o invita a los tuyos para que todos participen en la elección.</p>
+                </article>
+                <article class="feature-card">
+                    <h2>2. Votad y elegid</h2>
+                    <p>Primero decidid el género que mejor encaja con la ocasión y después votad por la película.</p>
+                </article>
+                <article class="feature-card">
+                    <h2>3. Descubrid más</h2>
+                    <p>Consultad el tráiler antes de elegir y, después de verla, puntuadla y compartid vuestros comentarios.</p>
+                </article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
+
