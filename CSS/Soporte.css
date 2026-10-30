@@ -1,0 +1,10 @@
+body {
+  background-color: #29483a;
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("../Imagenes/SoporteBG.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
