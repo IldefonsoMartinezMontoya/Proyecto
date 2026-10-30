@@ -1,0 +1,13 @@
+Imágenes descargadas de Wikimedia Commons.
+Consulta cada página de archivo para ver la licencia y la atribución indicadas por Commons.
+
+Western | Virginia City (1940) | Virginia_City_1940.jpg | https://commons.wikimedia.org/wiki/File:Errol_Flynn_Virginia_City_Still.jpg
+Western | In Old California (1942) | In_Old_California_1942.jpg | https://commons.wikimedia.org/wiki/File:In_old_California_1942_movie_publicity_still.jpg
+Ciencia_Ficcion | The Day the Earth Stood Still (1951) - Gort | Day_the_Earth_Stood_Still_Gort.jpg | https://commons.wikimedia.org/wiki/File:Gort_(The_Day_the_Earth_Stood_Still).jpg
+Ciencia_Ficcion | The Day the Earth Stood Still (1951) - Klaatu y Gort | Day_the_Earth_Stood_Still_Klaatu_Gort.jpg | https://commons.wikimedia.org/wiki/File:KlaatuandGortdepart.jpg
+Terror | The Phantom of the Opera (1925) | Phantom_of_the_Opera_1925.jpg | https://commons.wikimedia.org/wiki/File:The_Phantom_of_the_Opera_(1925)_-_32.jpg
+Terror | The Terror (1928) | The_Terror_1928.jpg | https://commons.wikimedia.org/wiki/File:The_Terror_(SAYRE_14109).jpg
+Animacion | Superman (1941) | Superman_1941.png | https://commons.wikimedia.org/wiki/File:Supermanshorttitle.PNG
+Animacion | Quack-a-Doodle-Doo (1950) | Quack_a_Doodle_Doo_1950.jpg | https://commons.wikimedia.org/wiki/File:QuackaDoodleDooNT1950.jpg
+Comedia | His Girl Friday (1940) | His_Girl_Friday_1940.jpg | https://commons.wikimedia.org/wiki/File:His_Girl_Friday_still_2.jpg
+Comedia | Bringing Up Baby (1938) | Bringing_Up_Baby_1938.jpg | https://commons.wikimedia.org/wiki/File:Bringing_up_baby_film_still.jpg

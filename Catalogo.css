@@ -1,0 +1,134 @@
+body {
+  background-color: #29483a;
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("FondoPeli.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.page-shell {
+  width: min(1320px, calc(100% - 2rem));
+}
+
+.catalogo-panel {
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.catalogo-panel h1 {
+  margin-bottom: 0.75rem;
+}
+
+.catalogo-panel .lead {
+  margin-bottom: 0;
+}
+
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: clamp(0.75rem, 1.7vw, 1.25rem);
+  margin-top: 2rem;
+}
+
+.genero-card {
+  min-width: 0;
+  padding: 0.85rem;
+  border: 1px solid rgba(25, 59, 49, 0.13);
+  border-radius: 1rem;
+  background: rgba(233, 229, 208, 0.48);
+  box-shadow: 0 8px 24px rgba(12, 28, 22, 0.09);
+}
+
+.genero-card h2 {
+  min-height: 2.5rem;
+  margin: 0 0 0.75rem;
+  color: var(--verde-profundo);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  background: #1d2924;
+  box-shadow: 0 8px 20px rgba(12, 28, 22, 0.18);
+}
+
+.slider img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.slider img.activa {
+  display: block;
+}
+
+.slider button {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: rgba(25, 59, 49, 0.88);
+  color: #fffdf5;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.slider button:hover {
+  transform: translateY(-50%) scale(1.06);
+  background: var(--limon);
+  color: var(--verde-profundo);
+}
+
+.slider button:focus-visible {
+  outline: 3px solid var(--limon);
+  outline-offset: 3px;
+}
+
+.slider .anterior {
+  left: 0.5rem;
+}
+
+.slider .siguiente {
+  right: 0.5rem;
+}
+
+@media (max-width: 760px) {
+  .catalogo-panel {
+    padding: 1.25rem;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 135px), 1fr));
+    gap: 0.75rem;
+  }
+
+  .genero-card {
+    padding: 0.65rem;
+  }
+
+  .genero-card h2 {
+    min-height: 2.3rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider button {
+    transition-duration: 0.01ms;
+  }
+}
