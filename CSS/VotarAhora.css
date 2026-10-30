@@ -1,0 +1,57 @@
+.generos {
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.generos legend {
+    margin-bottom: 1.5rem;
+    color: var(--verde-profundo);
+    font-size: 1.2rem;
+    font-weight: 750;
+}
+
+.genero input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+}
+
+.genero label {
+    display: inline-flex;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    background-color: var(--limon);
+    color: var(--verde-profundo);
+    font-weight: 750;
+    cursor: pointer;
+    transition: transform 160ms ease,
+                backgroud-color 160ms ease,
+                box-shadow 160ms ease;
+}
+
+.genero label:hover {
+    transform: translateY(-2px);
+    background: var(--gris-ui);
+    color: #fffdf5;
+    box-shadow: 0 8px 20px rgba(25, 59, 49, 0.2);
+}
+
+.genero input:checked + label {
+    background: var(--verde-profundo);
+    border-color: var(--verde-profundo);
+    color: #fffdf5;
+    box-shadow: 0 4px 12px rgba(25, 59, 49, 0.2);
+}
+
+body {
+  background-color: #29483a;
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("../Imagenes/HomeBG.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
