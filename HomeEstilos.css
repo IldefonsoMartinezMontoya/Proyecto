@@ -8,3 +8,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+/*Ajustes adicionales del botón "¡Empieza ya!"*/
+.empiezaYa {
+  margin-left: 300px;
+  margin-top: -50px;
+}
