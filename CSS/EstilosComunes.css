@@ -25,6 +25,11 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.65;
+  background-color: #29483a;
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(240, 207, 88, 0.2), transparent 36rem),
+    linear-gradient(135deg, #193b31, #285447 55%, #29483a);
+  background-attachment: fixed;
 }
 
 a {
@@ -187,11 +192,22 @@ a {
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
+button.boton {
+  font: inherit;
+  cursor: pointer;
+}
+
 .boton:hover {
   transform: translateY(-2px);
   background: var(--gris-ui);
   color: #fffdf5;
   box-shadow: 0 8px 20px rgba(25, 59, 49, 0.2);
+}
+
+button.boton:focus-visible,
+.boton:focus-visible {
+  outline: 3px solid #fffdf5;
+  outline-offset: 3px;
 }
 
 .hero-panel {

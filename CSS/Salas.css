@@ -1,0 +1,44 @@
+.salas-panel {
+  align-items: center;
+  text-align: center;
+}
+
+.salas-panel h1 {
+  max-width: none;
+}
+
+.salas-panel .lead {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.salas-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.sala-creada {
+  width: min(100%, 30rem);
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(25, 59, 49, 0.12);
+  border-radius: 1rem;
+  background: rgba(233, 229, 208, 0.4);
+}
+
+.sala-creada[hidden] {
+  display: none;
+}
+
+.sala-creada strong {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  background: rgba(25, 59, 49, 0.09);
+  color: var(--verde-profundo);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f0cf58">
+    <title>Salas | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="../CSS/EstilosComunes.css">
+    <link rel="stylesheet" href="../CSS/Salas.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html">Aplicación</a>
+                <a href="Peliculas.html">Películas</a>
+                <a href="Preguntas.html">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+                <a href="Salas.html" aria-current="page">Salas</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <section class="panel hero-panel salas-panel">
+            <p class="eyebrow">Plan para esta noche</p>
+            <h1>Tu sala de cine</h1>
+            <p class="lead">Crea una sala para preparar la elección de vuestra película.</p>
+
+            <div id="menuPrincipal" class="salas-menu">
+                <button id="crearSala" class="boton" type="button">Crear sala</button>
+                <button id="unirseSala" class="boton" type="button">Unirse a sala</button>
+            </div>
+
+            <section id="salaCreada" class="sala-creada" aria-live="polite" hidden>
+                <h2>Sala creada</h2>
+                <p>Código: <strong id="codigoSala"></strong></p>
+                <button id="volver" class="boton" type="button">Volver</button>
+            </section>
+        </section>
+    </main>
+
+    <script src="../JS/Salas.js" defer></script>
+</body>
+</html>
