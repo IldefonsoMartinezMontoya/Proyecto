@@ -170,24 +170,20 @@ a {
 }
 
 .lead {
-  max-width: 62ch;
   margin-bottom: 1.75rem;
   color: #46544d;
-  font-size: clamp(1.08rem, 2vw, 1.25rem);
+  font-family: CastoroTitling-Regular;
 }
 
 .boton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-  min-height: 3rem;
-  padding: 0.7rem 1.2rem;
+  align-self: center;
+  padding: 1rem 2rem;
   border: 1px solid var(--limon);
   border-radius: 999px;
   background: var(--limon);
   color: var(--verde-profundo);
   font-weight: 750;
+  font-size: 25px;
   text-decoration: none;
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
@@ -337,5 +333,62 @@ code {
   *::after {
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Seccion del usuario */
+.usuario {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+
+  padding: 5px;
+
+  border: 1px solid rgba(25, 59, 49, 0.16);
+  border-radius: 1.25rem;
+  background: rgba(240, 207, 88, 0.97);
+  box-shadow: 0 10px 32px rgba(12, 28, 22, 0.2);
+  backdrop-filter: blur(14px);
+}
+
+.usuario img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.usuario input {
+  display: none;
+}
+
+.opcionesUsuario {
+  display: none;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  width: 120px;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  background: var(--papel);
+  box-shadow: var(--sombra);
+}
+
+.usuario input:checked ~ .opcionesUsuario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+.opcionesUsuario a {
+  padding: 0.8 rem;
+  border-radius: 0.6 rem;
+  color: var(--verde-profundo);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.opcionesUsuario a:hover {
+  background: var(--limon);
 }
 
