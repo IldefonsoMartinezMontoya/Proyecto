@@ -1,3 +1,5 @@
+/* Sistema visual compartido: colores, navegación, paneles y componentes reutilizables. */
+/* Variables de color y sombra compartidas por todas las páginas. */
 :root {
   color-scheme: light;
   --verde-profundo: #193b31;
@@ -10,14 +12,17 @@
   --sombra: 0 20px 60px rgba(12, 28, 22, 0.24);
 }
 
+/* Hace que el tamaño declarado incluya borde y relleno. */
 * {
   box-sizing: border-box;
 }
 
+/* Activa el desplazamiento suave entre secciones. */
 html {
   scroll-behavior: smooth;
 }
 
+/* Fondo, tipografía y altura base de la página. */
 body {
   min-height: 100vh;
   margin: 0;
@@ -32,15 +37,18 @@ body {
   background-attachment: fixed;
 }
 
+/* Mantiene el color del enlace heredado del texto circundante. */
 a {
   color: inherit;
 }
 
+/* Centra la cabecera y limita su ancho máximo. */
 .site-header {
   width: min(1180px, calc(100% - 2rem));
   margin: 1rem auto 0;
 }
 
+/* Distribuye marca y enlaces dentro de la barra de navegación. */
 .site-nav {
   display: flex;
   align-items: center;
@@ -54,6 +62,7 @@ a {
   backdrop-filter: blur(14px);
 }
 
+/* Presenta el nombre de la marca en la cabecera. */
 .site-brand {
   display: inline-flex;
   align-items: center;
@@ -67,6 +76,7 @@ a {
   white-space: nowrap;
 }
 
+/* Dibuja el punto decorativo que acompaña a la marca. */
 .site-brand::before {
   width: 0.75rem;
   height: 0.75rem;
@@ -76,17 +86,20 @@ a {
   content: "";
 }
 
+/* Resalta la marca cuando representa la página actual. */
 .site-brand[aria-current="page"] {
   border-radius: 0.75rem;
   background: var(--gris-ui);
   color: #fffdf5;
 }
 
+/* Cambia el punto decorativo en la página activa. */
 .site-brand[aria-current="page"]::before {
   background: var(--limon);
   box-shadow: none;
 }
 
+/* Alinea los enlaces y permite que pasen a otra línea. */
 .site-nav-links {
   display: flex;
   align-items: center;
@@ -95,6 +108,7 @@ a {
   gap: 0.2rem;
 }
 
+/* Define tamaño, espaciado y aspecto base de los enlaces de navegación. */
 .site-nav-links a {
   display: inline-flex;
   align-items: center;
@@ -108,28 +122,33 @@ a {
   transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
 }
 
+/* Muestra el estado visual al pasar el puntero por un enlace. */
 .site-nav-links a:hover {
   transform: translateY(-1px);
   background: rgba(105, 113, 109, 0.16);
   color: var(--verde-profundo);
 }
 
+/* Resalta el enlace de navegación de la página actual. */
 .site-nav-links a[aria-current="page"] {
   background: var(--gris-ui);
   color: #fffdf5;
 }
 
 .site-nav a:focus-visible,
+/* Añade un indicador visible al enfocar botones con teclado. */
 .boton:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
 
+/* Ajusta el ancho del contenido en esta página. */
 .page-shell {
   width: min(1000px, calc(100% - 2rem));
   margin: clamp(2rem, 6vw, 4.5rem) auto;
 }
 
+/* Da fondo, borde, sombra y espaciado al contenedor de contenido. */
 .panel {
   padding: clamp(1.5rem, 5vw, 3.25rem);
   border: 1px solid rgba(255, 255, 255, 0.64);
@@ -140,26 +159,31 @@ a {
 }
 
 .panel h1,
+/* Define la jerarquía visual de los subtítulos. */
 .panel h2 {
   color: var(--verde-profundo);
   line-height: 1.2;
 }
 
+/* Ajusta el tamaño y el espaciado del título principal. */
 .panel h1 {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 5vw, 3.4rem);
   letter-spacing: -0.045em;
 }
 
+/* Define la jerarquía visual de los subtítulos. */
 .panel h2 {
   margin: 0 0 0.55rem;
   font-size: 1.15rem;
 }
 
+/* Normaliza el margen superior de los párrafos dentro de paneles. */
 .panel p {
   margin-top: 0;
 }
 
+/* Da estilo al texto breve que introduce cada sección. */
 .eyebrow {
   margin: 0 0 0.6rem;
   color: #6a5714;
@@ -169,12 +193,14 @@ a {
   text-transform: uppercase;
 }
 
+/* Destaca el párrafo introductorio de la página. */
 .lead {
   margin-bottom: 1.75rem;
   color: #46544d;
   font-family: CastoroTitling-Regular;
 }
 
+/* Diseña el estilo compartido de enlaces y botones de acción. */
 .boton {
   align-self: center;
   padding: 1rem 2rem;
@@ -188,11 +214,13 @@ a {
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
+/* Iguala la tipografía del botón HTML al estilo común y muestra el cursor. */
 button.boton {
   font: inherit;
   cursor: pointer;
 }
 
+/* Define el estado visual al pasar el puntero por una acción. */
 .boton:hover {
   transform: translateY(-2px);
   background: var(--gris-ui);
@@ -201,11 +229,13 @@ button.boton {
 }
 
 button.boton:focus-visible,
+/* Añade un indicador visible al enfocar botones con teclado. */
 .boton:focus-visible {
   outline: 3px solid #fffdf5;
   outline-offset: 3px;
 }
 
+/* Organiza verticalmente el bloque principal de portada. */
 .hero-panel {
   display: flex;
   min-height: min(66vh, 620px);
@@ -214,11 +244,13 @@ button.boton:focus-visible,
   justify-content: center;
 }
 
+/* Limita el ancho y escala el título del bloque principal. */
 .hero-panel h1 {
   max-width: 12ch;
   font-size: clamp(2.8rem, 8vw, 5.5rem);
 }
 
+/* Ajusta la lectura del texto introductorio del bloque principal. */
 .hero-panel .lead {
   max-width: 54ch;
   font-size: clamp(1.15rem, 2.4vw, 1.45rem);
@@ -226,6 +258,7 @@ button.boton:focus-visible,
 
 .feature-grid,
 .support-grid,
+/* Crea una cuadrícula adaptable para tarjetas del equipo. */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
@@ -236,6 +269,7 @@ button.boton:focus-visible,
 .feature-card,
 .support-card,
 .team-card,
+/* Da formato visual a cada pregunta y respuesta. */
 .faq-item {
   padding: 1.25rem;
   border: 1px solid rgba(25, 59, 49, 0.12);
@@ -246,36 +280,63 @@ button.boton:focus-visible,
 .feature-card p,
 .support-card p,
 .team-card p,
+/* Limita la anchura del texto de las respuestas. */
 .faq-item p {
   margin-bottom: 0;
   color: #4a564f;
 }
 
+/* Apila preguntas frecuentes con separación uniforme. */
 .faq-list {
   display: grid;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
+/* Ajusta el espacio bajo el título de cada pregunta. */
 .faq-item h2 {
   margin-bottom: 0.45rem;
 }
 
+/* Limita la anchura del texto de las respuestas. */
 .faq-item p {
   max-width: 70ch;
 }
 
+/* Centra el panel informativo del catálogo vacío. */
 .catalogo-vacio {
   max-width: 680px;
   margin: 2rem auto;
   text-align: center;
 }
 
+/* Centra el texto introductorio del catálogo. */
 .catalogo-vacio .lead {
   margin-right: auto;
   margin-left: auto;
 }
 
+/* Alinea las acciones del catálogo con un espacio constante entre ellas. */
+.catalogo-acciones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* Mantiene cada llamada a la acción en una sola línea y con tamaño equilibrado. */
+.catalogo-acciones .boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.35rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+/* Destaca los datos de contacto con un borde lateral. */
 .nota-contacto {
   margin: 1.5rem 0 0;
   padding: 1rem 1.15rem;
@@ -284,11 +345,13 @@ button.boton:focus-visible,
   background: rgba(105, 113, 109, 0.12);
 }
 
+/* Reduce el tamaño y separa las etiquetas de asunto sugerido. */
 .asunto {
   margin-top: 0.9rem !important;
   font-size: 0.93rem;
 }
 
+/* Distingue fragmentos de texto técnico con tipografía monoespaciada. */
 code {
   padding: 0.15rem 0.4rem;
   border-radius: 0.35rem;
@@ -297,45 +360,67 @@ code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
+/* Ajustes de presentación para pantallas estrechas. */
 @media (max-width: 760px) {
+  /* Distribuye marca y enlaces dentro de la barra de navegación. */
   .site-nav {
     flex-direction: column;
     gap: 0.35rem;
     padding: 0.7rem;
   }
 
+  /* Presenta el nombre de la marca en la cabecera. */
   .site-brand {
     justify-content: center;
   }
 
+  /* Alinea los enlaces y permite que pasen a otra línea. */
   .site-nav-links {
     justify-content: center;
   }
 
+  /* Define tamaño, espaciado y aspecto base de los enlaces de navegación. */
   .site-nav-links a {
     min-height: 2.35rem;
     padding: 0.45rem 0.65rem;
     font-size: 0.88rem;
   }
 
+  /* Organiza verticalmente el bloque principal de portada. */
   .hero-panel {
     min-height: 55vh;
   }
+
+  /* Apila las acciones para que no se monten en pantallas estrechas. */
+  .catalogo-acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Da a ambos botones el mismo ancho en móvil. */
+  .catalogo-acciones .boton {
+    width: 100%;
+    white-space: normal;
+  }
 }
 
+/* Reduce las animaciones si el usuario lo solicita en el sistema. */
 @media (prefers-reduced-motion: reduce) {
+  /* Activa el desplazamiento suave entre secciones. */
   html {
     scroll-behavior: auto;
   }
 
   *,
   *::before,
+  /* Define la presentación del elemento seleccionado. */
   *::after {
     transition-duration: 0.01ms !important;
   }
 }
 
 /* Seccion del usuario */
+/* Fija el menú de cuenta en la esquina superior derecha. */
 .usuario {
   position: fixed;
   top: 15px;
@@ -351,16 +436,19 @@ code {
   backdrop-filter: blur(14px);
 }
 
+/* Ajusta el tamaño del icono del menú de cuenta. */
 .usuario img {
   width: 100px;
   height: 100px;
   object-fit: contain;
 }
 
+/* Oculta la casilla que controla el menú desplegable. */
 .usuario input {
   display: none;
 }
 
+/* Define el panel flotante de opciones de cuenta. */
 .opcionesUsuario {
   display: none;
   position: absolute;
@@ -373,6 +461,7 @@ code {
   box-shadow: var(--sombra);
 }
 
+/* Muestra las opciones cuando se activa la casilla del menú. */
 .usuario input:checked ~ .opcionesUsuario {
   display: flex;
   flex-direction: column;
@@ -380,6 +469,7 @@ code {
 }
 
 
+/* Da espacio y contraste a cada opción de cuenta. */
 .opcionesUsuario a {
   padding: 0.8 rem;
   border-radius: 0.6 rem;
@@ -388,7 +478,7 @@ code {
   text-decoration: none;
 }
 
+/* Resalta la opción de cuenta bajo el puntero. */
 .opcionesUsuario a:hover {
   background: var(--limon);
 }
-

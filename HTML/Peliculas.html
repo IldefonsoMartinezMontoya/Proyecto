@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<!-- Página informativa de la sección de películas. -->
 <html lang="es">
+<!-- Metadatos, título y hojas de estilo de esta página. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="../CSS/PeliculaEstilo.css">
 </head>
 <body>
+    <!-- Cabecera compartida: marca y navegación principal. -->
     <header class="site-header">
         <nav class="site-nav" aria-label="Navegación principal">
             <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
@@ -35,13 +38,18 @@
         </nav>
     </header>
 
+    <!-- Contenido central, envuelto para mantener el ancho común del sitio. -->
     <main class="page-shell">
+        <!-- Panel informativo con enlaces al catálogo y a la aplicación. -->
         <section class="panel catalogo-vacio">
             <p class="eyebrow">El catálogo</p>
             <h1>Películas para cada plan</h1>
             <p class="lead">Aquí aparecerán las películas disponibles para que podáis consultar sus detalles y elegir vuestra próxima sesión.</p>
-            <a class="boton" href="Aplicacion.html">Cómo funciona <span aria-hidden="true">→</span></a>
-            <a class="boton" href="Catalogo.html">Ver catálogo completo <span aria-hidden="true">→</span></a>
+            <!-- Agrupa las acciones para mantenerlas alineadas y separadas. -->
+            <div class="catalogo-acciones">
+                <a class="boton" href="Aplicacion.html">Cómo funciona <span aria-hidden="true">→</span></a>
+                <a class="boton" href="Catalogo.html">Ver catálogo completo <span aria-hidden="true">→</span></a>
+            </div>
         </section>
     </main>
 </body>

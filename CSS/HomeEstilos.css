@@ -1,3 +1,5 @@
+/* Estilos específicos de HomeEstilos; se combinan con EstilosComunes.css. */
+/* Fondo, tipografía y altura base de la página. */
 body {
   background-color: #29483a;
   background-image:
@@ -10,6 +12,7 @@ body {
 }
 
 /*Ajustes adicionales del botón "¡Empieza ya!"*/
+/* Ajuste de posición para el botón de inicio de la página principal. */
 .empiezaYa {
   margin-left: 260px;
   margin-top: -51.5px;

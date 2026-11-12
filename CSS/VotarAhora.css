@@ -1,3 +1,5 @@
+/* Estilos específicos de VotarAhora; se combinan con EstilosComunes.css. */
+/* Ajusta el contenedor de opciones de géneros. */
 .generos {
     width: 100%;
     border: none;
@@ -5,6 +7,7 @@
     margin: 1rem 0;
 }
 
+/* Da jerarquía al título del grupo de géneros. */
 .generos legend {
     margin-bottom: 1.5rem;
     color: var(--verde-profundo);
@@ -12,12 +15,14 @@
     font-weight: 750;
 }
 
+/* Oculta visualmente la casilla y conserva su interacción accesible. */
 .genero input {
     position: absolute;
     width: 1px;
     height: 1px;
 }
 
+/* Convierte la etiqueta del género en una opción visual seleccionable. */
 .genero label {
     display: flex;
     align-items: center;
@@ -40,6 +45,7 @@
                 box-shadow 160ms ease;
 }
 
+/* Muestra el estado visual al pasar el puntero por un género. */
 .genero label:hover {
     transform: translateY(-2px);
     background: var(--gris-ui);
@@ -47,6 +53,7 @@
     box-shadow: 0 8px 20px rgba(25, 59, 49, 0.2);
 }
 
+/* Resalta la etiqueta asociada a una casilla seleccionada. */
 .genero input:checked + label {
     background: var(--verde-profundo);
     border-color: var(--verde-profundo);
@@ -54,6 +61,7 @@
     box-shadow: 0 4px 12px rgba(25, 59, 49, 0.2);
 }
 
+/* Fondo, tipografía y altura base de la página. */
 body {
   background-color: #29483a;
   background-image:

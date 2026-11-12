@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<!-- Pantalla para crear una sala y mostrar su código. -->
 <html lang="es">
+<!-- Metadatos, título y hojas de estilo de esta página. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="../CSS/Salas.css">
 </head>
 <body>
+    <!-- Cabecera compartida: marca y navegación principal. -->
     <header class="site-header">
         <nav class="site-nav" aria-label="Navegación principal">
             <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
@@ -23,7 +26,9 @@
         </nav>
     </header>
 
+    <!-- Contenido central, envuelto para mantener el ancho común del sitio. -->
     <main class="page-shell">
+        <!-- Panel principal de creación y gestión visual de salas. -->
         <section class="panel hero-panel salas-panel">
             <p class="eyebrow">Plan para esta noche</p>
             <h1>Tu sala de cine</h1>
@@ -34,6 +39,8 @@
                 <button id="unirseSala" class="boton" type="button">Unirse a sala</button>
             </div>
 
+            <!-- Bloque de contenido relacionado de esta página. -->
+
             <section id="salaCreada" class="sala-creada" aria-live="polite" hidden>
                 <h2>Sala creada</h2>
                 <p>Código: <strong id="codigoSala"></strong></p>
@@ -41,6 +48,8 @@
             </section>
         </section>
     </main>
+
+    <!-- Lógica interactiva específica de esta página. -->
 
     <script src="../JS/Salas.js" defer></script>
 </body>

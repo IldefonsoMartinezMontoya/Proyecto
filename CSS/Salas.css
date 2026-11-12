@@ -1,17 +1,22 @@
+/* Estilos específicos de Salas; se combinan con EstilosComunes.css. */
+/* Centra el contenido de la pantalla de salas. */
 .salas-panel {
   align-items: center;
   text-align: center;
 }
 
+/* Permite que el título de salas use todo el ancho disponible. */
 .salas-panel h1 {
   max-width: none;
 }
 
+/* Centra el texto introductorio de salas. */
 .salas-panel .lead {
   margin-right: auto;
   margin-left: auto;
 }
 
+/* Alinea los botones de sala y permite que se ajusten al ancho. */
 .salas-menu {
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +24,7 @@
   gap: 0.8rem;
 }
 
+/* Presenta el resultado de la creación de una sala. */
 .sala-creada {
   width: min(100%, 30rem);
   margin-top: 1.5rem;
@@ -28,10 +34,12 @@
   background: rgba(233, 229, 208, 0.4);
 }
 
+/* Respeta el atributo hidden para mantener el resultado oculto. */
 .sala-creada[hidden] {
   display: none;
 }
 
+/* Resalta el código de sala con estilo monoespaciado. */
 .sala-creada strong {
   display: inline-block;
   padding: 0.35rem 0.65rem;

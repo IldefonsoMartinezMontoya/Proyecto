@@ -1,1 +1,4 @@
+# Dependencias instaladas localmente; se restauran con npm ci.
 node_modules/
+# Base de datos y estado que Wrangler genera durante el desarrollo local.
+.wrangler/

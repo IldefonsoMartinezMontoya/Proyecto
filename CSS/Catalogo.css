@@ -1,3 +1,5 @@
+/* Estilos específicos de Catalogo; se combinan con EstilosComunes.css. */
+/* Fondo, tipografía y altura base de la página. */
 body {
   background-color: #29483a;
   background-image:
@@ -9,22 +11,27 @@ body {
   background-attachment: fixed;
 }
 
+/* Ajusta el ancho del contenido en esta página. */
 .page-shell {
   width: min(1320px, calc(100% - 2rem));
 }
 
+/* Reduce el relleno del panel de carteles. */
 .catalogo-panel {
   padding: clamp(1.25rem, 3vw, 2.5rem);
 }
 
+/* Ajusta el margen bajo el título del catálogo. */
 .catalogo-panel h1 {
   margin-bottom: 0.75rem;
 }
 
+/* Elimina el margen inferior para acercar la cuadrícula. */
 .catalogo-panel .lead {
   margin-bottom: 0;
 }
 
+/* Distribuye tarjetas de géneros en columnas adaptables. */
 .catalogo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
@@ -32,6 +39,7 @@ body {
   margin-top: 2rem;
 }
 
+/* Da estilo de tarjeta a cada género del catálogo. */
 .genero-card {
   min-width: 0;
   padding: 0.85rem;
@@ -41,6 +49,7 @@ body {
   box-shadow: 0 8px 24px rgba(12, 28, 22, 0.09);
 }
 
+/* Reserva altura y define el título de cada género. */
 .genero-card h2 {
   min-height: 2.5rem;
   margin: 0 0 0.75rem;
@@ -49,6 +58,7 @@ body {
   line-height: 1.25;
 }
 
+/* Recorta el carrusel y mantiene la proporción vertical del cartel. */
 .slider {
   position: relative;
   width: 100%;
@@ -59,6 +69,7 @@ body {
   box-shadow: 0 8px 20px rgba(12, 28, 22, 0.18);
 }
 
+/* Oculta los carteles por defecto y ajusta su encaje. */
 .slider img {
   display: none;
   width: 100%;
@@ -66,10 +77,12 @@ body {
   object-fit: contain;
 }
 
+/* Muestra el cartel que JavaScript marcó como activo. */
 .slider img.activa {
   display: block;
 }
 
+/* Posiciona y diseña las flechas de navegación del carrusel. */
 .slider button {
   position: absolute;
   top: 50%;
@@ -88,46 +101,57 @@ body {
   transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
+/* Amplía y cambia el color de la flecha bajo el puntero. */
 .slider button:hover {
   transform: translateY(-50%) scale(1.06);
   background: var(--limon);
   color: var(--verde-profundo);
 }
 
+/* Muestra el foco de teclado alrededor de las flechas. */
 .slider button:focus-visible {
   outline: 3px solid var(--limon);
   outline-offset: 3px;
 }
 
+/* Coloca la flecha para retroceder a la izquierda. */
 .slider .anterior {
   left: 0.5rem;
 }
 
+/* Coloca la flecha para avanzar a la derecha. */
 .slider .siguiente {
   right: 0.5rem;
 }
 
+/* Ajustes de presentación para pantallas estrechas. */
 @media (max-width: 760px) {
+  /* Reduce el relleno del panel de carteles. */
   .catalogo-panel {
     padding: 1.25rem;
   }
 
+  /* Distribuye tarjetas de géneros en columnas adaptables. */
   .catalogo-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 135px), 1fr));
     gap: 0.75rem;
   }
 
+  /* Da estilo de tarjeta a cada género del catálogo. */
   .genero-card {
     padding: 0.65rem;
   }
 
+  /* Reserva altura y define el título de cada género. */
   .genero-card h2 {
     min-height: 2.3rem;
     font-size: 0.95rem;
   }
 }
 
+/* Reduce las animaciones si el usuario lo solicita en el sistema. */
 @media (prefers-reduced-motion: reduce) {
+  /* Posiciona y diseña las flechas de navegación del carrusel. */
   .slider button {
     transition-duration: 0.01ms;
   }

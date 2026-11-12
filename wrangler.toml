@@ -1,0 +1,24 @@
+# Nombre del Worker que Wrangler publicará.
+name = "limoncio-api"
+# Archivo que implementa las rutas API del Worker.
+main = "src/index.js"
+# Versión de compatibilidad del runtime de Cloudflare Workers.
+compatibility_date = "2026-11-12"
+
+# Vincula este Worker a la base D1 remota ya creada en Cloudflare.
+[[d1_databases]]
+# Nombre que usa el código del Worker para acceder a la base.
+binding = "DB"
+# Nombre visible de la base existente en la cuenta Cloudflare.
+database_name = "proyecto"
+# Identificador único de esa base; no lo cambies por otro ordenador.
+database_id = "c406822b-fbc9-44f5-bf3b-741b17cc3efc"
+
+# Archivos estáticos del sitio que también se publican junto al Worker.
+[assets]
+# Carpeta raíz de la web; .assetsignore excluye código y configuración privados.
+directory = "."
+# Referencia usada por el Worker para servir HTML, CSS, imágenes y otros archivos.
+binding = "ASSETS"
+# Envía primero las solicitudes API al Worker y el resto al servidor de archivos.
+run_worker_first = ["/api/*"]

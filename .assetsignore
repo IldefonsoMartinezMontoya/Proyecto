@@ -1,0 +1,14 @@
+# Repositorio y datos de desarrollo local; no deben ser recursos públicos.
+.git
+.wrangler
+node_modules
+# Código de servidor, SQL de esquema y documentación para desarrolladores.
+src
+migrations
+manuales
+# Archivos de configuración del proyecto que no forman parte de la web pública.
+package.json
+package-lock.json
+wrangler.toml
+.gitignore
+.assetsignore

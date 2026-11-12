@@ -1,22 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Formulario para crear una cuenta nueva. -->
+<html lang="es">
+<!-- Metadatos, título y hojas de estilo de esta página. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="theme-color" content="#f0cf58">
+    <title>Registrarse | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="../CSS/EstilosComunes.css">
+    <link rel="stylesheet" href="../CSS/IniciarSesion.css">
 </head>
 <body>
-    <h2>Registrarse</h2>
-    <form action="">
-        <label for="email">Correo electrónico:</label>
-        <input type="email" required>
-        <label for="username">Nombre:</label>
-        <input type="text" required>
-        <label for="password">Contraseña:</label>
-        <input type="password" required>
-        <label for="password_confirm">Confirmar contraseña:</label>
-        <input type="password" required>
-        <input type="submit" value="Registrarse">
-    </form>
+    <!-- Cabecera compartida: marca y navegación principal. -->
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html">Aplicación</a>
+                <a href="Peliculas.html">Películas</a>
+                <a href="Preguntas.html">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+                <a href="Salas.html">Salas</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido central, envuelto para mantener el ancho común del sitio. -->
+    <main class="page-shell">
+        <!-- Panel visual que contiene el formulario de cuenta. -->
+        <section class="panel login-panel">
+            <p class="eyebrow">Únete al grupo</p>
+            <h1>Crear una cuenta</h1>
+            <p class="lead">Regístrate para empezar a decidir qué película ver.</p>
+
+            <!-- Formulario que agrupa campos relacionados para la acción de esta página. -->
+
+            <form class="login-form" id="registroForm">
+                <label for="accountName">Nombre de cuenta:</label>
+                <input id="accountName" name="accountName" type="text" autocomplete="name" maxlength="30" required>
+
+                <label for="username">Nombre de usuario:</label>
+                <input id="username" name="username" type="text" autocomplete="username" minlength="2" maxlength="15" required>
+
+                <label for="email">Correo electrónico:</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+
+                <label for="password">Contraseña:</label>
+                <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required>
+
+                <label for="password_confirm">Confirmar contraseña:</label>
+                <input id="password_confirm" name="password_confirm" type="password" autocomplete="new-password" minlength="8" required>
+
+                <button class="boton" type="submit">Registrarse</button>
+                <p id="registroMensaje" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <p class="login-alternative">¿Ya tienes cuenta? <a href="IniciarSesion.html">Inicia sesión</a>.</p>
+        </section>
+    </main>
+    <!-- Lógica interactiva específica de esta página. -->
+    <script src="../JS/Registrarse.js" defer></script>
 </body>
 </html>
