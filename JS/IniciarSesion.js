@@ -26,6 +26,13 @@ form?.addEventListener("submit", async (event) => {
       return;
     }
 
+    //Almacena la información de forma local.
+    localStorage.setItem("sesionIniciada", "true");
+    
+    if (result.user) {
+      localStorage.setItem("usuarioNombre", result.user.username || result.user.name)
+    }
+
     // La API ya creó la cookie de sesión; vuelve a la página principal.
     window.location.assign("Home.html");
   } catch {

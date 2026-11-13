@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - Personalización</title>
+  <!-- Ajusta el nombre de tu CSS común si se llama distinto -->
+  <link rel="stylesheet" href="../CSS/EstilosComunes.css">
+  <link rel="stylesheet" href="../CSS/EstilosPersonalizacionUsuario.css">
+</head>
+<body>
+
+  <!-- Barra de navegación superior heredada del sistema común -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="Home.html" class="site-brand">TuMarca</a>
+      <div class="site-nav-links">
+        <a href="Home.html">Inicio</a>
+        <a href="Catalogo.html">Catálogo</a>
+        <a href="PersonalizacionUsuario.html" aria-current="page">Mi Cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <div class="perfil-layout">
+      
+      <!-- SECCIÓN LATERAL IZQUIERDA -->
+      <aside class="panel perfil-sidebar">
+        <p class="eyebrow">Ajustes</p>
+        <nav class="sidebar-nav" aria-label="Subpáginas de usuario">
+          <button type="button" class="tab-btn activo" data-tab="tab-personalizacion">
+            Personalización
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-info">
+            Información de la cuenta
+          </button>
+          <hr class="sidebar-separador">
+          <button type="button" id="btnCerrarSesion" class="tab-btn btn-salir">
+            Cerrar sesión
+          </button>
+        </nav>
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL DERECHO -->
+      <section class="panel perfil-contenido">
+
+        <!-- SUBPÁGINA 1: PERSONALIZACIÓN -->
+        <div id="tab-personalizacion" class="subpagina activa">
+          <p class="eyebrow">Perfil Público</p>
+          <h1>Personalización</h1>
+          <p class="lead">Elige tu imagen de perfil, cómo te verán los demás y cuéntanos sobre ti.</p>
+
+          <form id="formPersonalizacion" class="perfil-form">
+            
+            <!-- Bloque de Avatar / Imagen de Perfil -->
+            <div class="avatar-bloque">
+              <button type="button" id="btnAbrirAvatares" class="avatar-trigger" title="Haz clic para cambiar tu imagen">
+                <img id="avatarActual" src="img/avatar1.png" alt="Imagen de perfil actual">
+                <span class="avatar-badge">Cambiar foto</span>
+              </button>
+              <div class="avatar-texto">
+                <h2>Imagen de perfil</h2>
+                <p>Haz clic sobre la imagen para elegir entre los avatares disponibles.</p>
+              </div>
+            </div>
+
+            <!-- Pestaña estática desplegable con las imágenes de perfil -->
+            <div id="selectorAvatares" class="selector-avatares oculto" aria-label="Galería de avatares">
+              <p class="selector-titulo">Selecciona tu avatar:</p>
+              <div class="avatares-grid">
+                <button type="button" class="avatar-opcion seleccionada" data-src="img/avatar1.png">
+                  <img src="img/avatar1.png" alt="Avatar 1">
+                </button>
+                <button type="button" class="avatar-opcion" data-src="img/avatar2.png">
+                  <img src="img/avatar2.png" alt="Avatar 2">
+                </button>
+                <button type="button" class="avatar-opcion" data-src="img/avatar3.png">
+                  <img src="img/avatar3.png" alt="Avatar 3">
+                </button>
+                <button type="button" class="avatar-opcion" data-src="img/avatar4.png">
+                  <img src="img/avatar4.png" alt="Avatar 4">
+                </button>
+              </div>
+            </div>
+
+            <!-- Campo: Nombre de usuario (de vista) -->
+            <div class="campo-grupo">
+              <label for="inputNombreVista">Nombre de usuario (de vista)</label>
+              <input type="text" id="inputNombreVista" name="displayName" maxlength="40" placeholder="Ej. Explorador Verde" required>
+            </div>
+
+            <!-- Campo: Descripción (máximo 500 caracteres) -->
+            <div class="campo-grupo">
+              <div class="label-con-contador">
+                <label for="inputDescripcion">Descripción</label>
+                <span id="contadorCaracteres" class="contador">0 / 500</span>
+              </div>
+              <textarea id="inputDescripcion" name="bio" rows="5" maxlength="500" placeholder="Escribe una breve descripción sobre ti..."></textarea>
+            </div>
+
+            <div class="acciones-form">
+              <button type="submit" class="boton boton-guardar">Guardar cambios</button>
+              <span id="mensajeGuardado" class="mensaje-estado" role="status"></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- SUBPÁGINA 2: INFORMACIÓN DE LA CUENTA -->
+        <div id="tab-info" class="subpagina oculto">
+          <p class="eyebrow">Datos Privados</p>
+          <h1>Información de la cuenta</h1>
+          <p class="lead">Datos utilizados para el registro e inicio de sesión en la plataforma.</p>
+
+          <div class="info-lista">
+            <div class="info-tarjeta">
+              <span class="info-etiqueta">Nombre de la cuenta</span>
+              <p id="infoNombreCuenta" class="info-valor">Cargando...</p>
+            </div>
+
+            <div class="info-tarjeta">
+              <span class="info-etiqueta">Correo electrónico</span>
+              <p id="infoCorreo" class="info-valor">Cargando...</p>
+            </div>
+
+            <div class="nota-contacto">
+              <strong>Seguridad de la cuenta:</strong> Por motivos de protección y privacidad, tu contraseña está cifrada y no se muestra en este panel.
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <script src="../JS/Usuario.js"></script>
+</body>
+</html>
