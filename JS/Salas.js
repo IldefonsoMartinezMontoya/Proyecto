@@ -39,6 +39,10 @@ const menu = document.getElementById("menuPrincipal");
 const sala = document.getElementById("salaCreada");
 const codigo = document.getElementById("codigoSala");
 
+const unirSala = document.getElementById("unirSala");
+const codigoEscrito = document.getElementById("codigoEscrito");
+const mensajeUnion = document.getElementById("mensajeUnion");
+
 // Genera y muestra un nuevo código al pulsar «Crear sala».
 document.getElementById("crearSala").addEventListener("click", () => {
     codigo.textContent = generarCodigo();
@@ -47,7 +51,33 @@ document.getElementById("crearSala").addEventListener("click", () => {
 });
 
 // Vuelve al menú inicial desde el panel de sala creada.
-document.getElementById("volver").addEventListener("click", () => {
+document.getElementById("volverCrear").addEventListener("click", () => {
     sala.hidden = true;
     menu.hidden = false;
+});
+
+document.getElementById("unirseSala").addEventListener("click", () => {
+    menu.hidden = true;
+    unirSala.hidden = false;
+
+    codigoEscrito.focus();
+});
+
+document.getElementById("confirmar").addEventListener("click", () => {
+    const codigo = codigoEscrito.value.trim();
+
+    if (codigo === "") {
+        mensajeUnion.textContent = "Escribe el código para unise a una sala";
+        return;
+    }
+
+    mensajeUnion.textContent = "Código introducido: " + codigo;
+});
+
+document.getElementById("volverUnir").addEventListener("click", () => {
+    unirSala.hidden = true;
+    menu.hidden = false;
+
+    codigoEscrito.value = "";
+    mensajeUnion.textContent = "";
 });
