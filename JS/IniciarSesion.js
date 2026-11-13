@@ -26,8 +26,9 @@ form?.addEventListener("submit", async (event) => {
       return;
     }
 
-    // La API ya creó la cookie de sesión; vuelve a la página principal.
-    window.location.assign("Home.html");
+    // La API ya creó la cookie. Si el usuario venía del botón de inicio, continúa a votar.
+    const returnTo = new URLSearchParams(window.location.search).get("returnTo");
+    window.location.assign(returnTo === "votar.html" ? returnTo : "Home.html");
   } catch {
     // Informa de errores de red o de un servidor de desarrollo detenido.
     message.textContent = "No se pudo conectar con el servidor. Comprueba que Wrangler esté ejecutándose.";

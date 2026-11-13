@@ -71,7 +71,7 @@ async function register(request, env) {
   try {
     // La consulta parametrizada evita insertar los datos como SQL ejecutable.
     await env.DB.prepare(
-      "INSERT INTO usuario (nombreCuenta, nombreUsu, correo, password_hash, fechCreate) VALUES (?, ?, ?, ?, date('now'))",
+      "INSERT INTO usuario (nombreCuenta, nombreUsu, correo, contrsenya, password_hash, fechCreate) VALUES (?, ?, ?, '', ?, date('now'))",
     ).bind(accountName, username, email, passwordHash).run();
   } catch (error) {
     if (String(error).toLowerCase().includes("unique")) {

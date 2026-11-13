@@ -1,0 +1,53 @@
+ /* Elimina los márgenes por defecto del navegador */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      height: 200vh; 
+    }
+
+    /* Estilos de la barra superior */
+    .barra-superior {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      color: white;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      z-index: 1000;
+      /* AÑADIDO: Evita que la barra bloquee clics si algo interactivo queda justo debajo */
+      pointer-events: none; 
+    }
+
+    .barra-superior h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      pointer-events: auto; /* Reactiva la selección/clics sobre el título */
+    }
+
+    /* NUEVO: Estilos para la zona del reproductor */
+    .zona-reproductor {
+      width: 100%;
+      height: 45vh; /* Ocupa el 45% del alto de la pantalla (como en tu dibujo) */
+      min-height: 300px;
+      background-color: #000;
+      position: relative;
+      z-index: 1; /* Queda por debajo del z-index: 1000 de tu barra */
+    }
+
+    .zona-reproductor video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Llena toda la zona sin dejar bordes vacíos */
+      display: block;
+    }
+
+    /* MODIFICADO: Cambiamos padding-top de 80px a 20px porque el video ya ocupa el espacio superior */
+    .contenido {
+      padding-top: 20px; 
+      padding-left: 20px;
+      color: white;
+    }
