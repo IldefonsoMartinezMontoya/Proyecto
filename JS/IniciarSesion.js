@@ -26,9 +26,10 @@ form?.addEventListener("submit", async (event) => {
       return;
     }
 
-    // La API ya creó la cookie. Si el usuario venía del botón de inicio, continúa a votar.
+    // La API ya creó la cookie. Solo se aceptan destinos locales conocidos.
     const returnTo = new URLSearchParams(window.location.search).get("returnTo");
-    window.location.assign(returnTo === "votar.html" ? returnTo : "Home.html");
+    const destinosPermitidos = new Set(["votar.html", "PersonalizacionUsuario.html"]);
+    window.location.assign(destinosPermitidos.has(returnTo) ? returnTo : "Home.html");
   } catch {
     // Informa de errores de red o de un servidor de desarrollo detenido.
     message.textContent = "No se pudo conectar con el servidor. Comprueba que Wrangler esté ejecutándose.";

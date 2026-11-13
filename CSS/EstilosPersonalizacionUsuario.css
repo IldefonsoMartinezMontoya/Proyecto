@@ -1,0 +1,295 @@
+/* Estilos específicos para la página de Personalización e Información de Usuario */
+
+/* Estructura de 2 columnas: barra lateral izquierda + contenido principal */
+.perfil-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Ajustes de espaciado interno para los paneles de esta vista */
+.perfil-sidebar {
+  padding: 1.5rem;
+}
+
+.perfil-contenido {
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+/* Navegación lateral izquierda */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tab-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.85rem;
+  background: transparent;
+  color: var(--verde-profundo);
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.tab-btn:hover {
+  background: rgba(25, 59, 49, 0.08);
+  transform: translateX(2px);
+}
+
+.tab-btn.activo {
+  background: var(--verde-profundo);
+  color: #fffdf5;
+}
+
+.sidebar-separador {
+  width: 100%;
+  margin: 0.5rem 0;
+  border: 0;
+  border-top: 1px solid rgba(25, 59, 49, 0.14);
+}
+
+/* Botón de cerrar sesión en el lateral */
+.btn-salir {
+  color: #8b261d;
+}
+
+.btn-salir:hover {
+  background: rgba(139, 38, 29, 0.12);
+  color: #6e1b14;
+}
+
+/* Control de visibilidad de subpáginas y pestañas */
+.oculto {
+  display: none !important;
+}
+
+/* Bloque de imagen de perfil interactiva */
+.avatar-bloque {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(25, 59, 49, 0.12);
+  border-radius: 1.1rem;
+  background: rgba(233, 229, 208, 0.35);
+}
+
+.avatar-trigger {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 3px solid var(--limon);
+  border-radius: 50%;
+  background: var(--verde-claro);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.avatar-trigger:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(25, 59, 49, 0.22);
+}
+
+.avatar-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.2rem 0;
+  background: rgba(25, 59, 49, 0.85);
+  color: #fffdf5;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.avatar-texto p {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+  color: #4a564f;
+}
+
+/* Pestaña estática desplegable para elegir avatar */
+.selector-avatares {
+  margin-bottom: 1.5rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(25, 59, 49, 0.18);
+  border-radius: 1rem;
+  background: var(--verde-claro);
+}
+
+.selector-titulo {
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--verde-profundo);
+}
+
+.avatares-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.85rem;
+}
+
+.avatar-opcion {
+  padding: 0.25rem;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: #fffdf7;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.avatar-opcion:hover {
+  transform: translateY(-2px);
+  border-color: var(--gris-ui);
+}
+
+.avatar-opcion.seleccionada {
+  border-color: var(--verde-profundo);
+  box-shadow: 0 0 0 3px var(--limon);
+}
+
+.avatar-opcion img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Formulario de personalización */
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.campo-grupo label {
+  color: var(--verde-profundo);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.label-con-contador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contador {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gris-ui);
+}
+
+.campo-grupo input,
+.campo-grupo textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(25, 59, 49, 0.22);
+  border-radius: 0.85rem;
+  background: #fffdf9;
+  color: var(--tinta);
+  font-family: inherit;
+  font-size: 0.98rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.campo-grupo input:focus,
+.campo-grupo textarea:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px rgba(40, 84, 71, 0.16);
+}
+
+.campo-grupo textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.acciones-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.boton-guardar {
+  font-size: 1rem;
+  padding: 0.8rem 1.75rem;
+}
+
+.mensaje-estado {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--verde);
+}
+
+/* Subpágina: Información de la cuenta */
+.info-lista {
+  display: grid;
+  gap: 1rem;
+}
+
+.info-tarjeta {
+  padding: 1.15rem 1.35rem;
+  border: 1px solid rgba(25, 59, 49, 0.12);
+  border-radius: 1rem;
+  background: rgba(233, 229, 208, 0.4);
+}
+
+.info-etiqueta {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gris-ui);
+}
+
+.info-valor {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--verde-profundo);
+}
+
+/* Adaptación a móviles y pantallas estrechas */
+@media (max-width: 760px) {
+  .perfil-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar-bloque {
+    flex-direction: column;
+    text-align: center;
+  }
+}

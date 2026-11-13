@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Avatar 4">
+  <rect width="128" height="128" rx="64" fill="#f1c6a9"/>
+  <path d="M24 128c3-27 18-40 40-40s37 13 40 40" fill="#497c71"/>
+  <path d="M33 62c-5-24 7-44 31-44 24 0 36 20 31 44l-5 12H38z" fill="#20201e"/>
+  <ellipse cx="64" cy="62" rx="23" ry="29" fill="#d69b73"/>
+  <path d="M40 52c3-19 12-29 24-29 14 0 23 10 25 29-9-7-16-10-25-10-9 0-16 4-24 10" fill="#20201e"/>
+  <circle cx="55" cy="63" r="2" fill="#2d2420"/><circle cx="73" cy="63" r="2" fill="#2d2420"/>
+  <path d="M57 76c4 3 10 3 14 0" fill="none" stroke="#995a49" stroke-width="2" stroke-linecap="round"/>
+</svg>
