@@ -1,10 +1,9 @@
 /* Estilos específicos de Catalogo; se combinan con EstilosComunes.css. */
 /* Fondo, tipografía y altura base de la página. */
 body {
-  background-color: #29483a;
   background-image:
     linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
-    url("FondoPeli.jpg");
+    url("../Imagenes/CarteleraBG.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

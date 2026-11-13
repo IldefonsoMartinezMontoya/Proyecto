@@ -44,7 +44,17 @@
             <section id="salaCreada" class="sala-creada" aria-live="polite" hidden>
                 <h2>Sala creada</h2>
                 <p>Código: <strong id="codigoSala"></strong></p>
-                <button id="volver" class="boton" type="button">Volver</button>
+                <button id="volverCrear" class="boton" type="button">Volver</button>
+            </section>
+
+            <section id="unirSala" class="unir-sala" aria-live="polite" hidden>
+                <h2>Unirse a una sala</h2>
+                <label for="codigoEscrito">Escribe el código de la sala: </label>
+                <input type="text" id="codigoEscrito" maxlength="8" >
+
+                <button id="confirmar" class="boton" type="button">Entrar</button>
+                <p id="mensajeUnion" aria-live="polite"></p>
+                <button id="volverUnir" class="boton" type="button">Volver</button>
             </section>
         </section>
     </main>
