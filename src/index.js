@@ -16,6 +16,30 @@ export default {
 // Enruta las operaciones de cuenta y convierte los errores imprevistos en una respuesta JSON.
 async function handleApiRequest(request, env, url) {
   try {
+    if (url.pathname === "/api/salas" && request.method === "POST") {
+      return await createRoom(request, env);
+    }
+
+    const joinMatch = url.pathname.match(
+      /^\/api\/salas\/([A-HJ-NP-Z2-9]{8})\/unirse$/,
+    );
+    if (joinMatch && request.method === "POST") {
+      return await joinRoom(request, env, joinMatch[1]);
+    }
+
+    const leaveMatch = url.pathname.match(
+      /^\/api\/salas\/([A-HJ-NP-Z2-9]{8})\/salir$/,
+    );
+    if (leaveMatch && request.method === "POST") {
+      return await leaveRoom(request, env, leaveMatch[1]);
+    }
+
+    const roomMatch = url.pathname.match(
+      /^\/api\/salas\/([A-HJ-NP-Z2-9]{8})$/,
+    );
+    if (roomMatch && request.method === "GET") {
+      return await getRoom(request, env, roomMatch[1]);
+    }
     if (url.pathname === "/api/register" && request.method === "POST") {
       return await register(request, env);
     }
@@ -34,7 +58,148 @@ async function handleApiRequest(request, env, url) {
     return json({ error: "Ha ocurrido un error en el servidor." }, 500, request);
   }
 }
+// Alfabeto para códigos fáciles de leer: no incluye I, O, 0 ni 1.
+const ROOM_CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
+// Genera un código de sala de ocho caracteres en el servidor.
+function generateRoomCode() {
+  const bytes = crypto.getRandomValues(new Uint8Array(8));
+  return Array.from(bytes, (byte) => ROOM_CODE_CHARS[byte % ROOM_CODE_CHARS.length]).join("");
+}
+
+// Crea una sala y añade a quien la crea como anfitrión.
+async function createRoom(request, env) {
+  const body = await readJson(request);
+  const nombre = cleanText(body.nombre);
+
+  if (nombre.length < 2 || nombre.length > 20) {
+    return json({ error: "El nombre debe tener entre 2 y 20 caracteres." }, 400, request);
+  }
+
+  const expiraEn = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+  let codigo = null;
+
+  // Si por casualidad ya existe ese código, genera otro y vuelve a intentarlo.
+  for (let intento = 0; intento < 5; intento += 1) {
+    const candidato = generateRoomCode();
+    const result = await env.DB.prepare(
+      "INSERT OR IGNORE INTO sala (codigo, expira_en) VALUES (?, ?)",
+    ).bind(candidato, expiraEn).run();
+
+    if (result.meta.changes > 0) {
+      codigo = candidato;
+      break;
+    }
+  }
+
+  if (!codigo) {
+    return json({ error: "No se pudo generar un código. Inténtalo de nuevo." }, 503, request);
+  }
+
+  const participanteId = crypto.randomUUID();
+  await env.DB.prepare(
+    "INSERT INTO participante_sala (id, codigo_sala, nombre, es_anfitrion) VALUES (?, ?, ?, 1)",
+  ).bind(participanteId, codigo, nombre).run();
+
+  const datosSala = await readRoomData(env, codigo);
+  return json({ ...datosSala, participanteId }, 201, request);
+}
+
+// Comprueba el código y añade a una persona a la sala.
+async function joinRoom(request, env, codigo) {
+  const body = await readJson(request);
+  const nombre = cleanText(body.nombre);
+
+  if (nombre.length < 2 || nombre.length > 20) {
+    return json({ error: "El nombre debe tener entre 2 y 20 caracteres." }, 400, request);
+  }
+
+  const sala = await readRoomData(env, codigo);
+  if (!sala) {
+    return json({ error: "No existe una sala activa con ese código." }, 404, request);
+  }
+
+  const participanteId = crypto.randomUUID();
+  const result = await env.DB.prepare(
+    "INSERT OR IGNORE INTO participante_sala (id, codigo_sala, nombre) VALUES (?, ?, ?)",
+  ).bind(participanteId, codigo, nombre).run();
+
+  if (result.meta.changes === 0) {
+    return json({ error: "Ya hay alguien con ese nombre en esta sala." }, 409, request);
+  }
+
+  return json({ ...(await readRoomData(env, codigo)), participanteId }, 200, request);
+}
+
+// Retira al participante y transfiere el anfitrión si era quien abandona la sala.
+async function leaveRoom(request, env, codigo) {
+  const body = await readJson(request);
+  const participanteId = cleanText(body.participanteId);
+
+  if (!/^[0-9a-f-]{36}$/i.test(participanteId)) {
+    return json({ error: "No se pudo identificar al participante." }, 400, request);
+  }
+
+  const sala = await readRoomData(env, codigo);
+  if (!sala) {
+    return json({ error: "No existe una sala activa con ese código." }, 404, request);
+  }
+
+  const participante = await env.DB.prepare(
+    "SELECT id, es_anfitrion FROM participante_sala WHERE id = ? AND codigo_sala = ?",
+  ).bind(participanteId, codigo).first();
+  if (!participante) {
+    return json({ error: "Ese participante ya no está en la sala." }, 404, request);
+  }
+
+  await env.DB.prepare(
+    "DELETE FROM participante_sala WHERE id = ? AND codigo_sala = ?",
+  ).bind(participanteId, codigo).run();
+
+  if (participante.es_anfitrion) {
+    const siguienteAnfitrion = await env.DB.prepare(
+      "SELECT id FROM participante_sala WHERE codigo_sala = ? ORDER BY unido_en LIMIT 1",
+    ).bind(codigo).first();
+
+    if (siguienteAnfitrion) {
+      await env.DB.prepare(
+        "UPDATE participante_sala SET es_anfitrion = 1 WHERE id = ?",
+      ).bind(siguienteAnfitrion.id).run();
+    } else {
+      await env.DB.prepare("DELETE FROM sala WHERE codigo = ?").bind(codigo).run();
+    }
+  }
+
+  return json({ message: "Has salido de la sala." }, 200, request);
+}
+
+// Devuelve la sala y su lista de participantes.
+async function getRoom(request, env, codigo) {
+  const datosSala = await readRoomData(env, codigo);
+
+  if (!datosSala) {
+    return json({ error: "No existe una sala activa con ese código." }, 404, request);
+  }
+
+  return json(datosSala, 200, request);
+}
+
+// Busca una sala que no haya caducado y carga a sus participantes.
+async function readRoomData(env, codigo) {
+  const ahora = new Date().toISOString();
+
+  const sala = await env.DB.prepare(
+    "SELECT codigo, creada_en, expira_en FROM sala WHERE codigo = ? AND expira_en > ?",
+  ).bind(codigo, ahora).first();
+
+  if (!sala) return null;
+
+  const { results: participantes } = await env.DB.prepare(
+    "SELECT nombre, es_anfitrion, unido_en FROM participante_sala WHERE codigo_sala = ? ORDER BY unido_en",
+  ).bind(codigo).all();
+
+  return { sala, participantes };
+}
 // Valida y crea una cuenta en D1. La contraseña se convierte en hash antes de guardarse.
 async function register(request, env) {
   // Normaliza los campos de texto para comparar identificadores de forma consistente.
@@ -112,9 +277,10 @@ async function login(request, env, url) {
   ).bind(user.id, tokenHash, expiresAt).run();
 
   // La cookie no es accesible desde JavaScript y se asegura bajo HTTPS.
+  // Al no fijar Max-Age, el navegador la conserva solo durante la sesión actual.
   const secure = url.protocol === "https:" ? "; Secure" : "";
   const headers = new Headers();
-  headers.append("Set-Cookie", `lp_session=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${SESSION_DAYS * 86400}${secure}`);
+  headers.append("Set-Cookie", `lp_session=${token}; HttpOnly; SameSite=Lax; Path=/${secure}`);
   return json({ user: publicUser(user) }, 200, request, headers);
 }
 

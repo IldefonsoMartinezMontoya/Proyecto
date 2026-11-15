@@ -22,7 +22,9 @@ form?.addEventListener("submit", async (event) => {
 
     // Si la API rechaza el acceso, muestra el motivo al usuario.
     if (!response.ok) {
-      message.textContent = result.error || "No se pudo iniciar sesión.";
+      message.textContent = response.status === 401
+        ? "No se pudo iniciar sesión. Si todavía no tienes una cuenta, regístrate con el botón de arriba."
+        : result.error || "No se pudo iniciar sesión.";
       return;
     }
 

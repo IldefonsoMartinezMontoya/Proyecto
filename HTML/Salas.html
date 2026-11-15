@@ -35,25 +35,33 @@
             <p class="lead">Crea una sala para preparar la elección de vuestra película.</p>
 
             <div id="menuPrincipal" class="salas-menu">
-                <button id="crearSala" class="boton" type="button">Crear sala</button>
-                <button id="unirseSala" class="boton" type="button">Unirse a sala</button>
+                <label for="nombreCrear">Tu nombre en la sala:</label>
+                <input class="salas-input" type="text" id="nombreCrear" maxlength="20" autocomplete="nickname">
+                <div class="salas-acciones">
+                    <button id="crearSala" class="boton" type="button">Crear sala</button>
+                    <button id="unirseSala" class="boton" type="button">Unirse a sala</button>
+                </div>
+                <p id="mensajeInicio" class="mensaje-sala" aria-live="polite"></p>
             </div>
 
-            <!-- Bloque de contenido relacionado de esta página. -->
-
             <section id="salaCreada" class="sala-creada" aria-live="polite" hidden>
-                <h2>Sala creada</h2>
+                <h2>Sala de cine</h2>
                 <p>Código: <strong id="codigoSala"></strong></p>
-                <button id="volverCrear" class="boton" type="button">Volver</button>
+                <h3>Participantes</h3>
+                <ul id="participantesSala" class="participantes-sala"></ul>
+                <p id="estadoSala" class="mensaje-sala" role="status"></p>
+                <button id="salirSala" class="boton" type="button">Salir de la sala</button>
             </section>
 
             <section id="unirSala" class="unir-sala" aria-live="polite" hidden>
                 <h2>Unirse a una sala</h2>
-                <label for="codigoEscrito">Escribe el código de la sala: </label>
-                <input type="text" id="codigoEscrito" maxlength="8" >
+                <label for="nombreUnirse">Tu nombre en la sala:</label>
+                <input class="salas-input" type="text" id="nombreUnirse" maxlength="20" autocomplete="nickname">
+                <label for="codigoEscrito">Escribe el código de la sala:</label>
+                <input class="salas-input" type="text" id="codigoEscrito" maxlength="8" autocapitalize="characters" autocomplete="off">
 
                 <button id="confirmar" class="boton" type="button">Entrar</button>
-                <p id="mensajeUnion" aria-live="polite"></p>
+                <p id="mensajeUnion" class="mensaje-sala" role="status" aria-live="polite"></p>
                 <button id="volverUnir" class="boton" type="button">Volver</button>
             </section>
         </section>
