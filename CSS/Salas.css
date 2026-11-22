@@ -1,3 +1,14 @@
+/* Fondo de pantalla */
+body {
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("../Imagenes/AplicacionBG.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 /* Estilos específicos de Salas; se combinan con EstilosComunes.css. */
 /* Centra el contenido de la pantalla de salas. */
 .salas-panel {

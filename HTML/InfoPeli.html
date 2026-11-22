@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Página por defecto para ver información de las películas -->
+<html lang="es">
+<!-- Metadatos, título y hojas de estilo de esta página. -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f0cf58">
+    <title>*Titulo | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="../CSS/EstilosComunes.css">
+    <link rel="stylesheet" href="../CSS/infoPeli.css">
+</head>
+<body>
+    <!-- Cabecera compartida: marca y navegación principal. -->
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html" aria-current="page">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Aplicacion.html">Aplicación</a>
+                <a href="Peliculas.html">Películas</a>
+                <a href="Preguntas.html">Preguntas frecuentes</a>
+                <a href="SobreNosotros.html">Sobre nosotros</a>
+                <a href="Soporte.html">Soporte</a>
+                <a href="Salas.html">Salas</a>
+            </div>
+        </nav>
+        <nav class="usuario" aria-label="Menú de usuario">
+            <input type="checkbox" id="menuUsuario">
+
+            <label for="menuUsuario">
+                <img src="../Imagenes/UserIcon.svg" alt="Menú de usuario">
+            </label>
+
+            <div class="opcionesUsuario">
+                <a href="IniciarSesion.html">Iniciar sesión</a>
+                <a href="Registrarse.html">Registrarse</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido central, envuelto para mantener el ancho común del sitio. -->
+    <main class="page-shell">
+        <!-- Bloque principal que presenta la acción central de la página. -->
+        <section class="panel">
+            <div class="parte_superior">
+                <div class="trailer">
+                    <iframe
+                        src="https://www.youtube.com/embed/1cyVuB576q8"
+                        title="Tráiler"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="info_peli">
+                    <h1>Titulo de la película</h1>
+
+                    <div>
+                        <h2>Sipnosis</h2>
+
+                        <p>
+                            Sipnosis de la película
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                Aquí ahí que ver como hacemos las votaciones
+            </div>
+
+
+            <div class="parte_inferior">
+                <section class="reparto">
+                    <h2>Reparto</h2>
+
+                    <div class="lista_actores">
+                        <article class="actor">
+                            <img src="../Imagenes/UserIcon.svg" alt="Nombre actor">
+                            <span>Nombre del actor</span>
+                        </article>
+                    </div>
+                </section>
+
+                <aside class="portada">
+                    <h2>Portada</h2>
+
+                    <img src="../Imagenes/PeliDef.jpg">
+                </aside>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
