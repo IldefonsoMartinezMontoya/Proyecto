@@ -11,6 +11,12 @@ La web ya está desplegada en Cloudflare y utiliza la base de datos D1 remota `p
 - [Registrarse](https://limoncio-api.limoncio-pelicular-proyecto-2026.workers.dev/HTML/Registrarse)
 - [Iniciar sesión](https://limoncio-api.limoncio-pelicular-proyecto-2026.workers.dev/HTML/IniciarSesion)
 
+### Acceso desde el botón «Empieza ya»
+
+En la página principal, el botón **¡Empieza ya! Crea una sala** comprueba la sesión con `GET /api/me`. Si ya has iniciado sesión, abre **Salas** directamente. Si no, te lleva a **Iniciar sesión** y, cuando el acceso se completa, vuelve a **Salas**. Si todavía no tienes cuenta, regístrate, inicia sesión y vuelve a pulsar el botón desde la página principal.
+
+El flujo se implementa en `HTML/Home.html` y `JS/Home.js`; `JS/IniciarSesion.js` valida el destino local `Salas.html` antes de redirigir.
+
 Para jugar con otra persona:
 
 1. Ambos abrís la misma web publicada. Cada persona se registra si aún no tiene cuenta e inicia sesión en su propio dispositivo.

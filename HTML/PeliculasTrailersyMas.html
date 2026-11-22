@@ -1,31 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titulo de la Pelicula</title>
-    <link rel="stylesheet" href="PeliculasTrailersyMas.css">
+    <meta name="theme-color" content="#f0cf58">
+    <meta name="description" content="Reproductor reutilizable de películas y tráileres de Limoncio-Pelicular.">
+    <title>Reproductor | Limoncio-Pelicular</title>
+    <link rel="stylesheet" href="../CSS/EstilosComunes.css">
+    <link rel="stylesheet" href="../CSS/Reproductor.css">
+    <script src="../JS/Reproductor.js" defer></script>
 </head>
 <body>
-    <!-- Tu barra superior actual -->
-  <div class="barra-superior">
-    <h2>Titulo de la Pelicula</h2>
-  </div>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="site-brand" href="Home.html">Limoncio-Pelicular</a>
+            <div class="site-nav-links">
+                <a href="Home.html">Inicio</a>
+                <a href="Peliculas.html" aria-current="page">Películas</a>
+                <a href="Salas.html">Salas</a>
+            </div>
+        </nav>
+    </header>
 
-  <!-- NUEVO: Contenedor del reproductor en la zona marcada -->
-  <div class="zona-reproductor">
-    <video controls poster="portada.jpg">
-      <source src="tu-video.mp4" type="video/mp4">
-      Tu navegador no soporta el elemento de video.
-    </video>
-  </div>
+    <main class="page-shell reproductor-shell">
+        <section class="panel reproductor-panel" aria-labelledby="titulo-pagina">
+            <p class="eyebrow">Sala de proyección</p>
+            <h1 id="titulo-pagina">Películas y tráileres</h1>
+            <p id="introduccion-pagina" class="lead">Selecciona un título para abrirlo en este reproductor.</p>
 
-  <!-- Tu contenido actual (ahora aparecerá justo debajo del video) -->
-  <div class="contenido">
-    <p>Aqui iran los detalles de la pelicula</p>
-    <p>Sinopsis de la pelicula</p>
-    <p>Reparto de la pelicula</p>
-    <p>Boton para reproducir</p>
-  </div>
+            <section id="ficha-pelicula" class="ficha-pelicula" aria-labelledby="titulo-pagina" hidden>
+                <div class="ficha-cabecera">
+                    <img id="poster-pelicula" class="poster-pelicula" src="" alt="">
+                    <div class="trailer-panel">
+                        <h2>Tráiler</h2>
+                        <div id="trailer-contenido" class="video-marco trailer-marco"></div>
+                        <p id="estado-trailer" class="texto-secundario" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <div class="ficha-grid">
+                    <section class="ficha-bloque">
+                        <h2>Sinopsis</h2>
+                        <p id="sinopsis-pelicula">Buscando información…</p>
+                    </section>
+                    <section class="ficha-bloque">
+                        <h2>Dirección</h2>
+                        <p id="director-pelicula">Buscando información…</p>
+                    </section>
+                    <section class="ficha-bloque">
+                        <h2 id="titulo-reparto">Reparto principal</h2>
+                        <p id="reparto-pelicula">Buscando información…</p>
+                    </section>
+                </div>
+
+                <section class="pelicula-local">
+                    <h2>Película completa</h2>
+                    <p id="disponibilidad-pelicula">Comprueba si el archivo está disponible en el pendrive conectado al ordenador que sirve los vídeos.</p>
+                    <button id="mostrar-reproductor" class="boton" type="button">Abrir reproductor de la película</button>
+                </section>
+                <p id="fuente-informacion" class="fuente-informacion"></p>
+            </section>
+
+            <section id="reproductor-local" class="reproductor-local" aria-label="Reproductor de archivos locales" hidden>
+                <div class="video-marco">
+                    <video id="reproductor-video" controls playsinline preload="metadata">
+                        <source id="fuente-video" src="" type="video/mp4">
+                        Tu navegador no puede reproducir este vídeo.
+                    </video>
+                </div>
+
+                <div class="reproductor-info">
+                    <div>
+                        <h2 id="titulo-video">Cargando contenido…</h2>
+                        <p id="detalle-video" class="detalle-video"></p>
+                    </div>
+                </div>
+                <p id="estado-reproductor" class="estado-reproductor" aria-live="polite"></p>
+            </section>
+            <a class="volver-inicio" href="Home.html">← Volver al inicio</a>
+        </section>
+    </main>
 </body>
 </html>

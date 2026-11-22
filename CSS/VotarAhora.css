@@ -1,67 +1,4 @@
-/* Estilos específicos de VotarAhora; se combinan con EstilosComunes.css. */
-/* Ajusta el contenedor de opciones de géneros. */
-.generos {
-    width: 100%;
-    border: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-/* Da jerarquía al título del grupo de géneros. */
-.generos legend {
-    margin-bottom: 1.5rem;
-    color: var(--verde-profundo);
-    font-size: 1.2rem;
-    font-weight: 750;
-}
-
-/* Oculta visualmente la casilla y conserva su interacción accesible. */
-.genero input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-}
-
-/* Convierte la etiqueta del género en una opción visual seleccionable. */
-.genero label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 150px;
-    min-height: 3rem;
-
-    padding: 0.7rem 1.2rem;
-    border-radius: 999px;
-
-    background-color: var(--limon);
-    color: var(--verde-profundo);
-    font-weight: 750;
-
-    cursor: pointer;
-    
-    transition: transform 160ms ease,
-                backgroud-color 160ms ease,
-                box-shadow 160ms ease;
-}
-
-/* Muestra el estado visual al pasar el puntero por un género. */
-.genero label:hover {
-    transform: translateY(-2px);
-    background: var(--gris-ui);
-    color: #fffdf5;
-    box-shadow: 0 8px 20px rgba(25, 59, 49, 0.2);
-}
-
-/* Resalta la etiqueta asociada a una casilla seleccionada. */
-.genero input:checked + label {
-    background: var(--verde-profundo);
-    border-color: var(--verde-profundo);
-    color: #fffdf5;
-    box-shadow: 0 4px 12px rgba(25, 59, 49, 0.2);
-}
-
-/* Fondo, tipografía y altura base de la página. */
+/* Presentación de la votación de género compartida por la sala. */
 body {
   background-color: #29483a;
   background-image:
@@ -71,4 +8,97 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.votar-panel {
+  align-items: center;
+  text-align: center;
+}
+
+.votar-panel h1 {
+  max-width: none;
+}
+
+.estado-voto {
+  max-width: 44rem;
+  margin: 0 auto 1.25rem;
+}
+
+.generos {
+  width: 100%;
+  margin: 1.25rem 0;
+  padding: 0;
+  border: 0;
+}
+
+.generos legend {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  color: var(--verde-profundo);
+  font-size: 1.1rem;
+  font-weight: 750;
+}
+
+.generos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  gap: 0.75rem;
+}
+
+.genero {
+  position: relative;
+}
+
+.genero input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.genero label {
+  display: grid;
+  min-height: 3.2rem;
+  place-items: center;
+  padding: 0.7rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--limon);
+  color: var(--verde-profundo);
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.genero label:hover {
+  transform: translateY(-2px);
+  background: var(--gris-ui);
+  color: #fffdf5;
+  box-shadow: 0 8px 20px rgba(25, 59, 49, 0.2);
+}
+
+.genero input:checked + label {
+  border-color: var(--verde-profundo);
+  background: var(--verde-profundo);
+  color: #fffdf5;
+  box-shadow: 0 4px 12px rgba(25, 59, 49, 0.2);
+}
+
+.genero input:focus-visible + label {
+  outline: 3px solid var(--verde-profundo);
+  outline-offset: 3px;
+}
+
+.volver-salas {
+  margin-top: 0.5rem;
+}
+
+#formularioVotacion[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genero label {
+    transition-duration: 0.01ms;
+  }
 }

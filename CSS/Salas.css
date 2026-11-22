@@ -102,6 +102,33 @@
   background: rgba(25, 59, 49, 0.08);
 }
 
+.votacion-sala {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(25, 59, 49, 0.15);
+  border-radius: 0.75rem;
+  background: rgba(255, 253, 245, 0.62);
+}
+
+.votacion-sala[hidden],
+.votacion-sala .boton[hidden] {
+  display: none;
+}
+
+.votacion-sala h3,
+.votacion-sala p {
+  margin: 0;
+}
+
+.votacion-sala .boton {
+  align-self: auto;
+  width: auto;
+  text-decoration: none;
+}
+
 .unir-sala {
   display: flex;
   flex-direction: column;

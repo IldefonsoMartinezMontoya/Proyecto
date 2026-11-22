@@ -34,6 +34,13 @@ async function handleApiRequest(request, env, url) {
       return await leaveRoom(request, env, leaveMatch[1]);
     }
 
+    const voteMatch = url.pathname.match(
+      /^\/api\/salas\/([A-HJ-NP-Z2-9]{8})\/votar$/,
+    );
+    if (voteMatch && request.method === "POST") {
+      return await voteRoom(request, env, voteMatch[1]);
+    }
+
     const roomMatch = url.pathname.match(
       /^\/api\/salas\/([A-HJ-NP-Z2-9]{8})$/,
     );
@@ -101,7 +108,7 @@ async function createRoom(request, env) {
     "INSERT INTO participante_sala (id, codigo_sala, nombre, es_anfitrion) VALUES (?, ?, ?, 1)",
   ).bind(participanteId, codigo, nombre).run();
 
-  const datosSala = await readRoomData(env, codigo);
+  const datosSala = await readRoomData(env, codigo, participanteId);
   return json({ ...datosSala, participanteId }, 201, request);
 }
 
@@ -119,16 +126,29 @@ async function joinRoom(request, env, codigo) {
     return json({ error: "No existe una sala activa con ese código." }, 404, request);
   }
 
+  if (sala.sala.genero_ganador) {
+    return json({ error: "La votación ya terminó y la sala está viendo el catálogo ganador." }, 409, request);
+  }
+
   const participanteId = crypto.randomUUID();
   const result = await env.DB.prepare(
-    "INSERT OR IGNORE INTO participante_sala (id, codigo_sala, nombre) VALUES (?, ?, ?)",
-  ).bind(participanteId, codigo, nombre).run();
+    `INSERT OR IGNORE INTO participante_sala (id, codigo_sala, nombre)
+     SELECT ?, codigo, ? FROM sala
+     WHERE codigo = ? AND expira_en > ? AND genero_ganador IS NULL`,
+  ).bind(participanteId, nombre, codigo, new Date().toISOString()).run();
 
   if (result.meta.changes === 0) {
+    const salaActualizada = await readRoomData(env, codigo);
+    if (!salaActualizada) {
+      return json({ error: "No existe una sala activa con ese código." }, 404, request);
+    }
+    if (salaActualizada.sala.genero_ganador) {
+      return json({ error: "La votación ya terminó y la sala está viendo el catálogo ganador." }, 409, request);
+    }
     return json({ error: "Ya hay alguien con ese nombre en esta sala." }, 409, request);
   }
 
-  return json({ ...(await readRoomData(env, codigo)), participanteId }, 200, request);
+  return json({ ...(await readRoomData(env, codigo, participanteId)), participanteId }, 200, request);
 }
 
 // Retira al participante y transfiere el anfitrión si era quien abandona la sala.
@@ -175,30 +195,145 @@ async function leaveRoom(request, env, codigo) {
 
 // Devuelve la sala y su lista de participantes.
 async function getRoom(request, env, codigo) {
-  const datosSala = await readRoomData(env, codigo);
+  const url = new URL(request.url);
+  const participanteId = cleanText(url.searchParams.get("participanteId"));
+  if (!/^[0-9a-f-]{36}$/i.test(participanteId)) {
+    return json({ error: "Únete a la sala para consultar su votación." }, 401, request);
+  }
+
+  const datosSala = await readRoomData(env, codigo, participanteId);
 
   if (!datosSala) {
     return json({ error: "No existe una sala activa con ese código." }, 404, request);
   }
 
+  if (!datosSala.participante) {
+    return json({ error: "Solo los participantes que siguen en la sala pueden consultar la votación." }, 403, request);
+  }
+
   return json(datosSala, 200, request);
 }
 
-// Busca una sala que no haya caducado y carga a sus participantes.
-async function readRoomData(env, codigo) {
+// Registra un voto solo si la identidad enviada sigue perteneciendo a la sala.
+async function voteRoom(request, env, codigo) {
+  const body = await readJson(request);
+  const participanteId = cleanText(body.participanteId);
+  const genero = cleanText(body.genero);
+  const generosPermitidos = new Set([
+    "Acción", "Miedo", "Comedia", "Aventura", "Thriller", "Romance", "Drama",
+    "Animada", "Sci-fi", "Fantasía", "Documental", "Bélica", "Histórica",
+    "Musical", "Western", "Psicológica", "Clásica",
+  ]);
+
+  if (!/^[0-9a-f-]{36}$/i.test(participanteId)) {
+    return json({ error: "No se pudo identificar al participante." }, 400, request);
+  }
+  if (!generosPermitidos.has(genero)) {
+    return json({ error: "Selecciona un género de la lista." }, 400, request);
+  }
+
+  const sala = await readRoomData(env, codigo);
+  if (!sala) {
+    return json({ error: "No existe una sala activa con ese código." }, 404, request);
+  }
+
+  const miembro = await env.DB.prepare(
+    "SELECT id FROM participante_sala WHERE id = ? AND codigo_sala = ?",
+  ).bind(participanteId, codigo).first();
+  if (!miembro) {
+    return json({ error: "Solo puede votar quien siga en esta sala." }, 403, request);
+  }
+  if (sala.sala.genero_ganador) {
+    return json({ error: "La votación ya se ha cerrado." }, 409, request);
+  }
+
+  const guardado = await env.DB.prepare(
+    `INSERT INTO voto_sala (codigo_sala, participante_id, genero)
+     SELECT ?, ?, ? WHERE EXISTS (
+       SELECT 1 FROM sala WHERE codigo = ? AND genero_ganador IS NULL AND expira_en > ?
+     )
+     ON CONFLICT(codigo_sala, participante_id) DO UPDATE SET
+       genero = excluded.genero,
+       votado_en = CURRENT_TIMESTAMP
+     WHERE EXISTS (
+       SELECT 1 FROM sala WHERE codigo = ? AND genero_ganador IS NULL AND expira_en > ?
+     )`,
+  ).bind(
+    codigo,
+    participanteId,
+    genero,
+    codigo,
+    new Date().toISOString(),
+    codigo,
+    new Date().toISOString(),
+  ).run();
+
+  if (guardado.meta.changes === 0) {
+    return json({ error: "La votación ya se ha cerrado." }, 409, request);
+  }
+
+  // Cierra la votación al recibir un voto de cada participante actual.
+  await env.DB.prepare(
+    `UPDATE sala
+     SET genero_ganador = (
+       SELECT genero FROM voto_sala
+       WHERE codigo_sala = sala.codigo
+       GROUP BY genero
+       ORDER BY COUNT(*) DESC, genero COLLATE NOCASE ASC
+       LIMIT 1
+     ), votacion_cerrada_en = CURRENT_TIMESTAMP
+     WHERE codigo = ? AND genero_ganador IS NULL
+       AND (SELECT COUNT(*) FROM participante_sala WHERE codigo_sala = sala.codigo) > 0
+       AND (SELECT COUNT(*) FROM voto_sala WHERE codigo_sala = sala.codigo)
+           = (SELECT COUNT(*) FROM participante_sala WHERE codigo_sala = sala.codigo)`,
+  ).bind(codigo).run();
+
+  return json(await readRoomData(env, codigo, participanteId), 200, request);
+}
+
+// Busca una sala activa y carga la lista de participantes y el progreso de sus votos.
+async function readRoomData(env, codigo, participanteId = "") {
   const ahora = new Date().toISOString();
 
   const sala = await env.DB.prepare(
-    "SELECT codigo, creada_en, expira_en FROM sala WHERE codigo = ? AND expira_en > ?",
+    "SELECT codigo, creada_en, expira_en, genero_ganador, votacion_cerrada_en FROM sala WHERE codigo = ? AND expira_en > ?",
   ).bind(codigo, ahora).first();
 
   if (!sala) return null;
 
   const { results: participantes } = await env.DB.prepare(
-    "SELECT nombre, es_anfitrion, unido_en FROM participante_sala WHERE codigo_sala = ? ORDER BY unido_en",
+    `SELECT p.id, p.nombre, p.es_anfitrion, p.unido_en,
+       CASE WHEN v.participante_id IS NULL THEN 0 ELSE 1 END AS ha_votado
+     FROM participante_sala p
+     LEFT JOIN voto_sala v ON v.codigo_sala = p.codigo_sala AND v.participante_id = p.id
+     WHERE p.codigo_sala = ? ORDER BY p.unido_en`,
   ).bind(codigo).all();
 
-  return { sala, participantes };
+  const participante = participanteId
+    ? await env.DB.prepare(
+      `SELECT p.id, v.genero AS genero_votado
+       FROM participante_sala p
+       LEFT JOIN voto_sala v ON v.codigo_sala = p.codigo_sala AND v.participante_id = p.id
+       WHERE p.id = ? AND p.codigo_sala = ? LIMIT 1`,
+    ).bind(participanteId, codigo).first()
+    : null;
+  const totalVotos = participantes.reduce((total, persona) => total + Number(persona.ha_votado), 0);
+
+  return {
+    sala,
+    participantes,
+    participante: participante ? {
+      id: participante.id,
+      haVotado: Boolean(participante.genero_votado),
+      generoVotado: participante.genero_votado || null,
+    } : null,
+    votacion: {
+      cerrada: Boolean(sala.votacion_cerrada_en),
+      generoGanador: sala.genero_ganador || null,
+      totalVotos,
+      totalParticipantes: participantes.length,
+    },
+  };
 }
 // Valida y crea una cuenta en D1. La contraseña se convierte en hash antes de guardarse.
 async function register(request, env) {

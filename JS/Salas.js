@@ -18,6 +18,10 @@ const botonCrear = document.getElementById("crearSala");
 const botonUnirse = document.getElementById("unirseSala");
 const botonConfirmar = document.getElementById("confirmar");
 const botonSalir = document.getElementById("salirSala");
+const seccionVotacion = document.getElementById("votacionSala");
+const estadoVotacion = document.getElementById("estadoVotacion");
+const botonVotar = document.getElementById("votarSala");
+const enlaceCatalogoGanador = document.getElementById("verCatalogoGanador");
 
 let salaActiva = null;
 let temporizadorSala = null;
@@ -51,9 +55,11 @@ function mostrarParticipantes(participantes) {
 
   for (const participante of participantes) {
     const elemento = document.createElement("li");
-    elemento.textContent = participante.es_anfitrion
-      ? `${participante.nombre} (anfitrión)`
-      : participante.nombre;
+    const detalles = [
+      participante.es_anfitrion ? "anfitrión" : "participante",
+      participante.ha_votado ? "ha votado" : "pendiente de votar",
+    ];
+    elemento.textContent = `${participante.nombre} (${detalles.join(" · ")})`;
     listaParticipantes.append(elemento);
   }
 }
@@ -61,6 +67,38 @@ function mostrarParticipantes(participantes) {
 function actualizarSala(datos) {
   codigoSala.textContent = datos.sala.codigo;
   mostrarParticipantes(datos.participantes);
+
+  const esMiembro = datos.participante?.id === salaActiva?.participanteId;
+  seccionVotacion.hidden = !esMiembro;
+  botonVotar.hidden = !esMiembro || datos.votacion.cerrada;
+  enlaceCatalogoGanador.hidden = !esMiembro || !datos.votacion.cerrada;
+
+  if (!esMiembro) return;
+
+  if (datos.votacion.cerrada) {
+    estadoVotacion.textContent = `Género ganador: ${datos.votacion.generoGanador}. En caso de empate, se decide por orden alfabético.`;
+    enlaceCatalogoGanador.textContent = `Ver catálogo de ${datos.votacion.generoGanador}`;
+    enlaceCatalogoGanador.href = `Catalogo.html?sala=${encodeURIComponent(datos.sala.codigo)}`;
+    enlaceCatalogoGanador.onclick = () => marcarCatalogoAbierto(datos.sala.codigo);
+
+    const claveVisto = claveCatalogoAbierto(datos.sala.codigo);
+    if (!sessionStorage.getItem(claveVisto)) {
+      marcarCatalogoAbierto(datos.sala.codigo);
+      window.location.assign(enlaceCatalogoGanador.href);
+    }
+    return;
+  }
+
+  estadoVotacion.textContent = `${datos.votacion.totalVotos} de ${datos.votacion.totalParticipantes} participantes han votado.`;
+  botonVotar.textContent = datos.participante.haVotado ? "Cambiar mi voto" : "Votar género";
+}
+
+function claveCatalogoAbierto(codigo) {
+  return `limoncioCatalogoAbierto:${codigo}`;
+}
+
+function marcarCatalogoAbierto(codigo) {
+  sessionStorage.setItem(claveCatalogoAbierto(codigo), "1");
 }
 
 function guardarSalaActiva() {
@@ -77,7 +115,7 @@ function abrirSala(datos, nombre, participanteId) {
   actualizarSala(datos);
   mensajeInicio.textContent = "";
   mensajeUnion.textContent = "";
-  estadoSala.textContent = "La lista se actualiza automáticamente.";
+  estadoSala.textContent = "La lista y los votos se actualizan automáticamente.";
   mostrarVista("sala");
   iniciarActualizaciones();
 }
@@ -143,11 +181,11 @@ async function actualizarSalaDesdeServidor() {
   if (!salaActiva) return;
 
   try {
-    const datos = await solicitarApi(`/api/salas/${salaActiva.codigo}`);
+    const datos = await solicitarApi(`/api/salas/${salaActiva.codigo}?participanteId=${encodeURIComponent(salaActiva.participanteId)}`);
     actualizarSala(datos);
-    estadoSala.textContent = "La lista se actualiza automáticamente.";
+    estadoSala.textContent = "La lista y los votos se actualizan automáticamente.";
   } catch (error) {
-    if (error.status === 404) {
+    if ([401, 403, 404].includes(error.status)) {
       detenerActualizaciones();
       sessionStorage.removeItem(CLAVE_SALA_ACTIVA);
       salaActiva = null;
@@ -183,6 +221,7 @@ async function salirDeSala() {
       body: JSON.stringify({ participanteId: salaActiva.participanteId }),
     });
     detenerActualizaciones();
+    sessionStorage.removeItem(claveCatalogoAbierto(salaActiva.codigo));
     sessionStorage.removeItem(CLAVE_SALA_ACTIVA);
     salaActiva = null;
     mostrarVista("menu");
@@ -204,7 +243,10 @@ async function restaurarSalaActiva() {
       throw new Error("Datos de sala no válidos.");
     }
 
-    const datos = await solicitarApi(`/api/salas/${salaGuardada.codigo}`);
+    const datos = await solicitarApi(`/api/salas/${salaGuardada.codigo}?participanteId=${encodeURIComponent(salaGuardada.participanteId)}`);
+    if (datos.participante?.id !== salaGuardada.participanteId) {
+      throw new Error("Ya no perteneces a esta sala.");
+    }
     salaActiva = salaGuardada;
     actualizarSala(datos);
     estadoSala.textContent = "La lista se actualiza automáticamente.";
@@ -233,6 +275,10 @@ document.getElementById("volverUnir").addEventListener("click", () => {
 
 campoCodigo.addEventListener("input", () => {
   campoCodigo.value = campoCodigo.value.toUpperCase();
+});
+
+botonVotar.addEventListener("click", () => {
+  window.location.assign("votar.html");
 });
 
 restaurarSalaActiva();

@@ -1,12 +1,12 @@
-// Comprueba la sesión del servidor antes de enviar al usuario a votar.
-const startVotingLink = document.querySelector("#empiezaYa");
+// Comprueba la sesión antes de dejar que el usuario empiece a crear una sala.
+const startLink = document.querySelector("#empiezaYa");
 
-startVotingLink?.addEventListener("click", async (event) => {
+startLink?.addEventListener("click", async (event) => {
   event.preventDefault();
 
-  if (startVotingLink.dataset.checking === "true") return;
-  startVotingLink.dataset.checking = "true";
-  startVotingLink.setAttribute("aria-busy", "true");
+  if (startLink.dataset.checking === "true") return;
+  startLink.dataset.checking = "true";
+  startLink.setAttribute("aria-busy", "true");
 
   try {
     const response = await fetch("/api/me", {
@@ -16,10 +16,10 @@ startVotingLink?.addEventListener("click", async (event) => {
     if (!response.ok) throw new Error("No se pudo consultar la sesión.");
 
     const { user } = await response.json();
-    window.location.assign(user ? "votar.html" : "IniciarSesion.html?returnTo=votar.html");
+    window.location.assign(user ? "Salas.html" : "IniciarSesion.html?returnTo=Salas.html");
   } catch {
-    startVotingLink.removeAttribute("aria-busy");
-    delete startVotingLink.dataset.checking;
+    startLink.removeAttribute("aria-busy");
+    delete startLink.dataset.checking;
     window.alert("No se pudo comprobar la sesión. Comprueba que Wrangler esté ejecutándose e inténtalo de nuevo.");
   }
 });

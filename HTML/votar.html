@@ -40,122 +40,39 @@
 
     <!-- Contenido central, envuelto para mantener el ancho común del sitio. -->
     <main class="page-shell">
-        <!-- Bloque principal que presenta la acción central de la página. -->
-        <section class="panel hero-panel">
-            <h1>Hora de votar!</h1>
-            <!-- Formulario que agrupa campos relacionados para la acción de esta página. -->
-            <form>
-                <!-- Grupo accesible de opciones para seleccionar los géneros que se votarán. -->
+        <section class="panel hero-panel votar-panel">
+            <p class="eyebrow">Decidid juntos</p>
+            <h1>Vota el género</h1>
+            <p id="estadoVoto" class="estado-voto" role="status" aria-live="polite">Comprobando tu sala…</p>
+            <form id="formularioVotacion" hidden>
                 <fieldset class="generos">
-                    <legend>Elige que generos te interesan</legend>
-
-                    <!-- Distribuye las casillas de géneros en filas y columnas. -->
-
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="accion" name="accion" value="accion"/>
-                                    <label for="accion">Acción</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="terror" name="terror" value="terror"/>
-                                    <label for="terror">Terror</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="comedia" name="comedia" value="comedia"/>
-                                    <label for="comedia">Comedia</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="aventura" name="aventura" value="aventura"/>
-                                    <label for="aventura">Aventura</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="thriller" name="thriller" value="thriller"/>
-                                    <label for="thriller">Thriller</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                    <div class="genero">
-                                        <input type="checkbox" id="romance" name="romance" value="romance"/>
-                                        <label for="romance">Romance</label>
-                                    </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="drama" name="drama" value="drama"/>
-                                    <label for="drama">Drama</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="animada" name="animada" value="animada"/>
-                                    <label for="animada">Animada</label>
-                                </div>
-                            </td>
-                            <td>       
-                                <div class="genero">
-                                    <input type="checkbox" id="sci-fi" name="sci-fi" value="sci-fi"/>
-                                    <label for="sci-fi">Sci-fi</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="fantasia" name="fantasia" value="fantasia"/>
-                                    <label for="fantasia">Fantasia</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="documental" name="documental" value="documental"/>
-                                    <label for="documental">Documental</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="belica" name="belica" value="belica"/>
-                                    <label for="belica">Belica</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="historica" name="historica" value="historica"/>
-                                    <label for="historica">Historica</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="musical" name="musical" value="musical"/>
-                                    <label for="musical">Musical</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="genero">
-                                    <input type="checkbox" id="psicologica" name="psicologica" value="psicologica"/>
-                                    <label for="psicologica">Psicologica</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <legend>Elige un género. Cada participante dispone de un voto.</legend>
+                    <div class="generos-grid">
+                        <div class="genero"><input type="radio" id="accion" name="genero" value="Acción" required><label for="accion">Acción</label></div>
+                        <div class="genero"><input type="radio" id="miedo" name="genero" value="Miedo"><label for="miedo">Miedo</label></div>
+                        <div class="genero"><input type="radio" id="comedia" name="genero" value="Comedia"><label for="comedia">Comedia</label></div>
+                        <div class="genero"><input type="radio" id="aventura" name="genero" value="Aventura"><label for="aventura">Aventura</label></div>
+                        <div class="genero"><input type="radio" id="thriller" name="genero" value="Thriller"><label for="thriller">Thriller</label></div>
+                        <div class="genero"><input type="radio" id="romance" name="genero" value="Romance"><label for="romance">Romance</label></div>
+                        <div class="genero"><input type="radio" id="drama" name="genero" value="Drama"><label for="drama">Drama</label></div>
+                        <div class="genero"><input type="radio" id="animada" name="genero" value="Animada"><label for="animada">Animada</label></div>
+                        <div class="genero"><input type="radio" id="scifi" name="genero" value="Sci-fi"><label for="scifi">Sci-fi</label></div>
+                        <div class="genero"><input type="radio" id="fantasia" name="genero" value="Fantasía"><label for="fantasia">Fantasía</label></div>
+                        <div class="genero"><input type="radio" id="documental" name="genero" value="Documental"><label for="documental">Documental</label></div>
+                        <div class="genero"><input type="radio" id="belica" name="genero" value="Bélica"><label for="belica">Bélica</label></div>
+                        <div class="genero"><input type="radio" id="historica" name="genero" value="Histórica"><label for="historica">Histórica</label></div>
+                        <div class="genero"><input type="radio" id="musical" name="genero" value="Musical"><label for="musical">Musical</label></div>
+                        <div class="genero"><input type="radio" id="western" name="genero" value="Western"><label for="western">Western</label></div>
+                        <div class="genero"><input type="radio" id="psicologica" name="genero" value="Psicológica"><label for="psicologica">Psicológica</label></div>
+                        <div class="genero"><input type="radio" id="clasica" name="genero" value="Clásica"><label for="clasica">Clásica</label></div>
+                    </div>
                 </fieldset>
-                <br>
-                <a class="boton" href="submit">Enviar los votos</span></a>
+                <button id="guardarVoto" class="boton" type="submit">Guardar mi voto</button>
             </form>
+            <a class="boton volver-salas" href="Salas.html">Volver a la sala</a>
         </section>
     </main>
 
-    <script src="../JS/CuentaIniciada.js" defer></script>
+    <script src="../JS/VotarAhora.js" defer></script>
 </body>
 </html>

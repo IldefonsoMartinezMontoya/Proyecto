@@ -30,7 +30,7 @@ form?.addEventListener("submit", async (event) => {
 
     // La API ya creó la cookie. Solo se aceptan destinos locales conocidos.
     const returnTo = new URLSearchParams(window.location.search).get("returnTo");
-    const destinosPermitidos = new Set(["votar.html", "PersonalizacionUsuario.html"]);
+    const destinosPermitidos = new Set(["votar.html", "PersonalizacionUsuario.html", "Salas.html"]);
     window.location.assign(destinosPermitidos.has(returnTo) ? returnTo : "Home.html");
   } catch {
     // Informa de errores de red o de un servidor de desarrollo detenido.
