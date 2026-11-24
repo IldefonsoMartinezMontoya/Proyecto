@@ -1,7 +1,11 @@
 body {
   background-image:
-    radial-gradient(ellipse at 15% 10%, rgba(240, 207, 88, 0.18), transparent 36rem),
-    linear-gradient(135deg, #193b31, #285447 55%, #29483a);
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("../Imagenes/ReproductorBG.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .reproductor-shell {

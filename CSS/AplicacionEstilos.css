@@ -10,3 +10,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}

@@ -1,4 +1,14 @@
 /* Estilos específicos de Salas; se combinan con EstilosComunes.css. */
+body {
+  background-color: #29483a;
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("../Imagenes/ReproductorBG.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 /* Centra el contenido de la pantalla de salas. */
 .salas-panel {
   align-items: center;

@@ -214,13 +214,43 @@ a {
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
+.SubBoton {
+  align-self: center;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 2px solid var(--limon);
+  color: var(--verde-profundo);
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 160ms ease;
+}
+
+.BigBoton {
+  align-self: center;
+  padding: 1rem 2rem;
+  border: 1px solid var(--limon);
+  border-radius: 999px;
+  background: var(--limon);
+  color: var(--verde-profundo);
+  font-weight: 750;
+  font-size: 25px;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
 /* Iguala la tipografía del botón HTML al estilo común y muestra el cursor. */
+button.BigBoton,
+button.SubBoton,
 button.boton {
   font: inherit;
   cursor: pointer;
 }
 
 /* Define el estado visual al pasar el puntero por una acción. */
+.BigBoton:hover,
+.SubBoton:hover,
 .boton:hover {
   transform: translateY(-2px);
   background: var(--gris-ui);
@@ -228,6 +258,8 @@ button.boton {
   box-shadow: 0 8px 20px rgba(25, 59, 49, 0.2);
 }
 
+button.BigBoton:focus-visible,
+button.SubBoton:focus-visible,
 button.boton:focus-visible,
 /* Añade un indicador visible al enfocar botones con teclado. */
 .boton:focus-visible {

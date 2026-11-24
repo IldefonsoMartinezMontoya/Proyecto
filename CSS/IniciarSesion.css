@@ -1,4 +1,14 @@
 /* Estilos específicos de IniciarSesion; se combinan con EstilosComunes.css. */
+body {
+  background-color: #29483a;
+  background-image:
+    linear-gradient(rgba(17, 34, 26, 0.35), rgba(17, 34, 26, 0.48)),
+    url("../Imagenes/FalteTodoMenosLimones.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 /* Separa el enlace de registro del formulario de acceso. */
 .registrarse {
   margin: 0 0 1.25rem;
