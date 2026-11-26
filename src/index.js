@@ -76,6 +76,11 @@ function generateRoomCode() {
 
 // Crea una sala y añade a quien la crea como anfitrión.
 async function createRoom(request, env) {
+  const user = await findCurrentUser(request, env);
+  if (!user) {
+    return json({ error: "Inicia sesión para crear una sala." }, 401, request);
+  }
+
   const body = await readJson(request);
   const nombre = cleanText(body.nombre);
 
@@ -421,15 +426,20 @@ async function login(request, env, url) {
 
 // Devuelve los datos públicos del usuario si la cookie contiene una sesión vigente.
 async function currentUser(request, env) {
+  const user = await findCurrentUser(request, env);
+  return json({ user: user ? publicUser(user) : null }, 200, request);
+}
+
+// Busca la cuenta asociada a la cookie de sesión, si sigue vigente.
+async function findCurrentUser(request, env) {
   const token = cookieValue(request.headers.get("Cookie"), "lp_session");
-  if (!token) return json({ user: null }, 200, request);
+  if (!token) return null;
 
   // Compara en D1 el hash de la cookie con la sesión guardada y no devuelve secretos.
   const tokenHash = await sha256Hex(token);
-  const user = await env.DB.prepare(
+  return await env.DB.prepare(
     "SELECT u.id, u.nombreCuenta, u.nombreUsu, u.correo FROM sesion s JOIN usuario u ON u.id = s.usuario_id WHERE s.token_hash = ? AND s.expires_at > ? LIMIT 1",
   ).bind(tokenHash, new Date().toISOString()).first();
-  return json({ user: user ? publicUser(user) : null }, 200, request);
 }
 
 // Elimina la sesión del servidor y borra la cookie del navegador.

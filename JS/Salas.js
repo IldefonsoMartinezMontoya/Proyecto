@@ -121,14 +121,35 @@ function abrirSala(datos, nombre, participanteId) {
 }
 
 async function crearSala() {
+  botonCrear.disabled = true;
+  mensajeInicio.textContent = "Comprobando tu sesión…";
+
+  try {
+    const respuestaSesion = await fetch("/api/me", {
+      credentials: "same-origin",
+      cache: "no-store",
+    });
+    if (!respuestaSesion.ok) throw new Error("No se pudo comprobar la sesión.");
+
+    const { user } = await respuestaSesion.json();
+    if (!user) {
+      window.location.assign("IniciarSesion.html?returnTo=Salas.html");
+      return;
+    }
+  } catch {
+    mensajeInicio.textContent = "No se pudo comprobar la sesión. Comprueba tu conexión e inténtalo de nuevo.";
+    botonCrear.disabled = false;
+    return;
+  }
+
   const nombre = campoNombreCrear.value.trim();
   if (nombre.length < 2 || nombre.length > 20) {
     mensajeInicio.textContent = "Escribe un nombre de entre 2 y 20 caracteres.";
     campoNombreCrear.focus();
+    botonCrear.disabled = false;
     return;
   }
 
-  botonCrear.disabled = true;
   mensajeInicio.textContent = "Creando sala…";
 
   try {
